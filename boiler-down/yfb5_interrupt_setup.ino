@@ -1,7 +1,7 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
-            setup Interrupt
+            setup YF-B5 Interrupt
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-void setupInterrupt() {
+void setupYfb5Interrupt() {
 
   pinMode(PIN_YFB5, INPUT);
   //digitalWrite(PIN_YFB5, HIGH);
