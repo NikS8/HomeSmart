@@ -74,7 +74,7 @@ void setup() {
   Serial.println(freeRam());
   
   setuphttpServer();
-  setupInterrupt();
+  setupYfb5Interrupt();
   setupDs18Sensors();
   setupCurrent();
   
