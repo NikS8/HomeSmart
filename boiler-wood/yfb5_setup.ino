@@ -1,7 +1,13 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
-            Включение-выключение TX
+            setup YF-B5 Interrupt
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-  void txOff() { UCSR0B |= (1 << TXEN0); }
-  void txOn() { UCSR0B &= ~(1 << TXEN0); }
+void yfb5InterruptSetup() {
+
+  pinMode(PIN_YFB5, INPUT);
+  //digitalWrite(PIN_YFB5, HIGH);
+  attachInterrupt(PIN_INTERRUPT_YFB5, yfb5PulseCounter, FALLING);
+  sei();
+
+}
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
