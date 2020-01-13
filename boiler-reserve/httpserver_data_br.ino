@@ -43,7 +43,7 @@ String createDataString() {
   resultData.concat(String(getFlowData()));
 
   resultData.concat(F(","));
-  resultData.concat(F("\n\t\"cf-pressure\":"));
+  resultData.concat(F("\n\"cf-pressure\":"));
   resultData.concat(String(getPressureData(), 2));
 
   resultData.concat(F("\n}"));
