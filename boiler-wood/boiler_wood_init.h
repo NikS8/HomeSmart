@@ -41,10 +41,10 @@ unsigned long yfb5LastTime;
 HX711 get_U;
 //  https://forum.arduino.cc/index.php?topic=432678.0
 
-const long  Uu = 1533333;//1539999;//1538853;   // Rohmesswert unteres Ende
-const long  Uo = 1977777;//1948677 +18    // Rohmesswert oberes Ende
-const float Ru = 109.3; // 23,5 // Widerstandswert unteres Ende
-const float Ro = 162.2; // 163 // Widerstandswert oberes Ende
+const long  Uu = 1529333;//1533333;//1539999;//1538853;   // Rohmesswert unteres Ende
+const long  Uo = 2224222;//1977777;//1948677 +18    // Rohmesswert oberes Ende
+const float Ru = 108.7; // 22 // Widerstandswert unteres Ende
+const float Ro = 184.5;// 220 // Widerstandswert oberes Ende
 
 long Umess;
 float Rx, tempPT100;

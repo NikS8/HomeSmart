@@ -13,10 +13,10 @@ int getShutter() {
   //accelgyro.getRotation(&gx, &gy, &gz);
 #ifdef OUTPUT_READABLE_ACCELGYRO
   // display tab-separated accel/gyro x/y/z values
-  accelX = ax / 141 + 36;
+  accelX = ax / 141;
   //accelX = (atan2(ax, -az) + PI) * RAD_TO_DEG;
   //  double accYangle = (atan2(ay,az)+PI)*RAD_TO_DEG;
-  //accelX = accelX - 150;
+  accelX = 175-accelX;
   Serial.print("    x ");
   //Serial.print(ax/141);
   //Serial.print("    ");
