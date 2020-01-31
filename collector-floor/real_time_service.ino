@@ -8,8 +8,6 @@ void realTimeService() {
 
   while (reqClient.available()) reqClient.read();
 
-  ds18RequestTemperatures();
-
   String data = createDataString();
 
   reqClient.println(F("HTTP/1.1 200 OK"));

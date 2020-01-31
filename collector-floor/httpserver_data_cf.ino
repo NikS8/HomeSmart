@@ -38,11 +38,13 @@ String createDataString() {
   resultData.concat(F(",\n\t\"cf-kitch-f\":"));
   resultData.concat(getFlowData2());
   // resultData.concat(F(",\n\t\"cf-radiator-f\":"));
-  // resultData.concat(getFlowData3());
+  // resultData.concat(getFlowData3()); //  резерв для 8-й ветки
   resultData.concat(F(",\n\t\"cf-vbath-f\":"));
   resultData.concat(getFlowDataA5());
   resultData.concat(F(",\n\t\"cf-vbed-f\":"));
   resultData.concat(getFlowDataA4());
+  resultData.concat(F(",\n\t\"cf-mixer-servo\":"));
+  resultData.concat(servo996r.read());
   resultData.concat(F("\n\t }"));
   resultData.concat(F(",\n\"freeRam\":"));
   resultData.concat(freeRam());

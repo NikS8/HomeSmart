@@ -27,7 +27,8 @@ volatile long flowSensorPulseCountA3 = 0;
 volatile long flowSensorPulseCountA4 = 0;
 volatile long flowSensorPulseCountA5 = 0;
 volatile long flowSensorPulseCount2 = 0;
-//volatile long flowSensorPulseCount3 = 0;
+//volatile long flowSensorPulseCount3 = 0;	//	резерв для 8-й ветки
+
 // time
 uint32_t flowSensorLastTimeA0;
 uint32_t flowSensorLastTimeA1;
@@ -36,7 +37,10 @@ uint32_t flowSensorLastTimeA3;
 uint32_t flowSensorLastTimeA4;
 uint32_t flowSensorLastTimeA5;
 uint32_t flowSensorLastTime2;
-//uint32_t flowSensorLastTime3;
+//uint32_t flowSensorLastTime3;	//	резерв для 8-й ветки
+
+//  Блок Servo996R  -----------------------------------------------------------
+Servo servo996r;
 
 //	Блок TIME  ----------------------------------------------------------------
 #define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000 
