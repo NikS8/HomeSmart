@@ -2,12 +2,25 @@
             realTimeService
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void realTimeService() {
+String readString;
 
   EthernetClient reqClient = httpServer.available();
   if (!reqClient) return;
 
-  while (reqClient.available()) reqClient.read();
+  while (reqClient.available()) {
+      readString += client.read();
+  }
 
+  if (c == '\n') {
+    // log it in serial pls:
+    //Serial.print(readString)
+
+    responseData(reqClient);
+  }
+
+}
+
+void responseData(EthernetClient &reqClient) {
   String data = createDataString();
 
   reqClient.println(F("HTTP/1.1 200 OK"));
