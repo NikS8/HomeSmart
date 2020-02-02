@@ -26,6 +26,7 @@
 #include <RBD_Timer.h>            //  DS18B20  pin OneWire D9
 #include <EnableInterrupt.h>      //  flow YF-B5 pins A0,A1,A2,A3,A4,A5,D2,D3
 #include <Servo.h>                //  Servo996R pin 5
+#include <Regexp.h>
 
 //  Блок settings  ------------------------------------------------------------
 #include "collector_floor_init.h"
@@ -44,7 +45,7 @@ void setup() {
   ds18b20Setup();
   yfb5InterruptSetup();
   servo996rSetup();
-
+  
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
