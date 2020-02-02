@@ -7,17 +7,23 @@ String readString;
   EthernetClient reqClient = httpServer.available();
   if (!reqClient) return;
 
-  while (reqClient.available()) {
-      readString += client.read();
+  while (reqClient.connected()) {
+    if (reqClient.available()) {
+
+      char c = reqClient.read();
+
+      readString += c;
+
+
+      if (c == '\n') {
+        // log it in serial pls:
+        Serial.println("readString");
+        Serial.println(readString);
+
+        responseData(reqClient);
+      }
+    }
   }
-
-  if (c == '\n') {
-    // log it in serial pls:
-    //Serial.print(readString)
-
-    responseData(reqClient);
-  }
-
 }
 
 void responseData(EthernetClient &reqClient) {
