@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+collector-floor/libraries/
+boiler-wood/libraries/
+boiler-reserve/libraries/
+boiler-down/libraries/
+bedbath/libraries/
