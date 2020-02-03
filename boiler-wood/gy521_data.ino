@@ -1,7 +1,7 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             GY-521
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-int getShutter() {
+int getGY521Data() {
 
    // read raw accel/gyro measurements from device
   accelgyro.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
@@ -13,14 +13,15 @@ int getShutter() {
   //accelgyro.getRotation(&gx, &gy, &gz);
 #ifdef OUTPUT_READABLE_ACCELGYRO
   // display tab-separated accel/gyro x/y/z values
-  accelX = ax / 141;
+  accelY = ay / 141 + 108;
   //accelX = (atan2(ax, -az) + PI) * RAD_TO_DEG;
   //  double accYangle = (atan2(ay,az)+PI)*RAD_TO_DEG;
-  accelX = 175-accelX;
+//  accelY = (atan2(ay,az)+PI)*RAD_TO_DEG;
+//  accelX = 175-accelX;
   Serial.print("    x ");
   //Serial.print(ax/141);
   //Serial.print("    ");
-  Serial.print(accelX);
+  Serial.print(accelY);
   /*
     Serial.print("    y ");
     Serial.print(ay/141);
@@ -51,17 +52,19 @@ int getShutter() {
 
 #endif
 #ifdef OUTPUT_BINARY_ACCELGYRO
-  Serial.write((uint8_t)(ax >> 8)); Serial.write((uint8_t)(ax & 0xFF));
-  /*
-    Serial.write((uint8_t)(ay >> 8)); Serial.write((uint8_t)(ay & 0xFF));
-    Serial.write((uint8_t)(az >> 8)); Serial.write((uint8_t)(az & 0xFF));
+//  Serial.write((uint8_t)(ax >> 8)); Serial.write((uint8_t)(ax & 0xFF));
+  
+
+
+Serial.write((uint8_t)(ay >> 8)); Serial.write((uint8_t)(ay & 0xFF));
+/*    Serial.write((uint8_t)(az >> 8)); Serial.write((uint8_t)(az & 0xFF));
     Serial.write((uint8_t)(gx >> 8)); Serial.write((uint8_t)(gx & 0xFF));
     Serial.write((uint8_t)(gy >> 8)); Serial.write((uint8_t)(gy & 0xFF));
     Serial.write((uint8_t)(gz >> 8)); Serial.write((uint8_t)(gz & 0xFF));
   */
 #endif
 
-    return accelX;
+    return accelY;
 
 }
 

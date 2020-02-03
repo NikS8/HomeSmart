@@ -36,15 +36,15 @@ unsigned long yfb5LastTime;
 #define UMIN  900000
 #define UMAX 8000000
 #define RMIN    80.0
-#define RMAX   500.0
+#define RMAX   400.0
 
 HX711 get_U;
 //  https://forum.arduino.cc/index.php?topic=432678.0
 
-const long  Uu = 1529333;//1533333;//1539999;//1538853;   // Rohmesswert unteres Ende
-const long  Uo = 2224222;//1977777;//1948677 +18    // Rohmesswert oberes Ende
-const float Ru = 108.7; // 22 // Widerstandswert unteres Ende
-const float Ro = 184.5;// 220 // Widerstandswert oberes Ende
+const long  Uu = 1987905;//..1987230;// Rohmesswert unteres Ende
+const long  Uo = 4112725;//4153141;// Rohmesswert oberes Ende
+const float Ru = 106.7; // 17* // Widerstandswert unteres Ende
+const float Ro = 220.5;// 318* // Widerstandswert oberes Ende
 
 long Umess;
 float Rx, tempPT100;
@@ -65,13 +65,16 @@ MPU6050 accelgyro;
 //MPU6050 accelgyro(0x69); // <-- use for AD0 high
 int16_t ax, ay, az;
 int16_t gx, gy, gz;
-int16_t accelX;
+int16_t accelY;
 
 // uncomment "OUTPUT_READABLE_ACCELGYRO" if you want to see a tab-separated
 // list of the accel X/Y/Z and then gyro X/Y/Z values in decimal. Easy to read,
 // not so easy to parse, and slow(er) over UART.
 
 #define OUTPUT_READABLE_ACCELGYRO
+
+//  Блок Servo996R  -----------------------------------------------------------
+Servo servomotor;
 
 //	Блок TIME  ----------------------------------------------------------------
 #define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000 
