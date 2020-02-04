@@ -30,6 +30,7 @@
 
 //  Блок settings  ------------------------------------------------------------
 #include "collector_floor_init.h"
+#include "httpParser.h"
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             setup
@@ -45,6 +46,8 @@ void setup() {
   ds18b20Setup();
   yfb5InterruptSetup();
   servo996rSetup();
+
+
 
 }
 
