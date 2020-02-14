@@ -57,8 +57,8 @@ void setup() {
 void loop() {
 
   ds18RequestTemperatures();
-  
-  realTimeService();
+
+  myServer.iterate();
   
   resetWhen30Days();
 
