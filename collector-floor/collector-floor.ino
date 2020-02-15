@@ -47,8 +47,9 @@ void setup() {
   yfb5InterruptSetup();
   servo996rSetup();
 
-
-
+  myServer.httpServer = &httpServer;
+  myServer.dataFn = &createDataString;
+  myServer.commandFn = &processCommand;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
