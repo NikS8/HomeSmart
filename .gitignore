@@ -34,3 +34,4 @@
 
 collector-floor/libraries/
 .vscode/
+*.nex
