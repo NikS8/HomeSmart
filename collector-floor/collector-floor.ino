@@ -47,8 +47,10 @@ void setup() {
   yfb5InterruptSetup();
   servo996rSetup();
 
-
-
+  myServer.httpServer = &httpServer;
+  myServer.dataFn = &createDataString;
+  myServer.commandFn = &processCommand;
+  //myServer.freeRam = &freeRam; // for debug
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
@@ -57,8 +59,8 @@ void setup() {
 void loop() {
 
   ds18RequestTemperatures();
-  
-  realTimeService();
+
+  myServer.iterate();
   
   resetWhen30Days();
 
