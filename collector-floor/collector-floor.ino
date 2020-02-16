@@ -50,6 +50,7 @@ void setup() {
   myServer.httpServer = &httpServer;
   myServer.dataFn = &createDataString;
   myServer.commandFn = &processCommand;
+  //myServer.freeRam = &freeRam; // for debug
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
