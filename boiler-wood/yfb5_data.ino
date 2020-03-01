@@ -1,7 +1,7 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             function to measurement flow water
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-int getFlowData() {
+  int getFlowData() {
   //  static int yfb5PulsesPerSecond;
   unsigned long yfb5PulsesPerSecond;
 

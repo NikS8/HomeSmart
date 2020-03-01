@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+*.hex
 
 libraries/
 collector-floor/libraries/
@@ -37,4 +38,3 @@ bedbah/libraries/
 boiler-down/libraries/
 boiler-reserve/libraries/
 boiler-wood/libraries/
-*.hex

@@ -1,16 +1,10 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             setup httpServer
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-void httpServerSetup() {
+void servoSetup() {
 
-  Ethernet.begin(mac, ip);
-
-  Serial.println(F("Server is ready."));
-  Serial.print(F("Please connect to http://"));
-  Serial.println(Ethernet.localIP());
-
-  httpServer.begin();
-
+  servomotor.attach(5);	// сервопривод на 5 пине
+   
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

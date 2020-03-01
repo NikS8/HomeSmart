@@ -13,8 +13,8 @@ float getPressureData() {
   //  sensorPressTankFrom = (sensorPressTankFrom * 0.0048875);    
   //  Напряжение в вольтах 0-5В
   //  sensorPressTankFrom = (sensorPressTankFrom * 0.0259);
-  Serial.print(F("   sensorPress = "));
-  Serial.println(pressure);
+//  Serial.print(F("   sensorPress = "));
+//  Serial.println(pressure);
 
   return pressure;
 }

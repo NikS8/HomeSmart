@@ -13,20 +13,28 @@ String createDataString()
 
   resultData.concat(F(","));
   resultData.concat(F("\n\"data\": {"));
+  
+  resultData.concat(F("\n\t\"bw-tPT100-smoke\":"));
+  resultData.concat(String(getPT100Data()));
 
-  resultData.concat(F("\n\"bw-pressure\":"));
+  resultData.concat(F(",\n\t\"bw-pressure\":"));
   resultData.concat(String(getPressureData(), 2));
 
-  resultData.concat(F(","));
-  resultData.concat(F("\n\"bw-tPT100-smoke\":"));
-  resultData.concat(String(getPT100Data()));
+  resultData.concat(F(",\n\t\"bw-flow\":"));
+  resultData.concat(String(getFlowData()));
+  
+  resultData.concat(F(",\n\t\"bw-gy-shutter\":"));
+  resultData.concat(getGY521Data());
+  
+  resultData.concat(F(",\n\t\"bw-servo-shutter\":"));
+  resultData.concat(servomotor.read() - 93);
 
   for (uint8_t index = 0; index < ds18DeviceCount; index++)
   {
     DeviceAddress deviceAddress;
     ds18Sensors.getAddress(deviceAddress, index);
 
-    resultData.concat(F(",\n\""));
+    resultData.concat(F(",\n\t\""));
     for (uint8_t i = 0; i < 8; i++)
     {
       if (deviceAddress[i] < 16) resultData.concat("0");
@@ -36,16 +44,9 @@ String createDataString()
     resultData.concat(F("\":"));
     resultData.concat(ds18Sensors.getTempC(deviceAddress));
   }
-  
-  resultData.concat(F(","));
-  resultData.concat(F("\n\"bw-flow\":"));
-  resultData.concat(String(getFlowData()));
-  resultData.concat(F("\n}"));
-
-  resultData.concat(F(","));
-  
-  resultData.concat(F("\n\"bw-shutter\":"));
-  resultData.concat(getShutter());
+ 
+   
+  resultData.concat(F("\n\t}"));
  
   resultData.concat(F(",\n\"freeRam\":"));
   resultData.concat(freeRam());

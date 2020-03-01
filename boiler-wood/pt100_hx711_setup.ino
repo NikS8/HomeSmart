@@ -6,8 +6,12 @@ void pt100hx711Setup() {
   int i;
   long buf = 0;
   long U = 0;
+  
  Serial.println(F("HX711 Temperaturmessung mit Pt100 Widerstandsthermometer"));
-  get_U.begin(6, 5, 32);
+
+  pinMode( A1, INPUT );
+  pinMode( A2, INPUT );
+  get_U.begin(A2, A1, 32);  //  DT - A2, SCK - A1, канал B - 32
 
   // Abgleich Messbereichsgrenze unten
   if (Uu <= UMIN || Ru == RMIN) {

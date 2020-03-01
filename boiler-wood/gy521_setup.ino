@@ -14,11 +14,11 @@ void gy521Setup() {
   // it's really up to you depending on your project)
  
    // initialize device
-  Serial.println("Initializing I2C devices...");
+//  Serial.println("Initializing I2C devices...");
   accelgyro.initialize();
   // verify connection
-  Serial.println("Testing device connections...");
-  Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
+//  Serial.println("Testing device connections...");
+//  Serial.println(accelgyro.testConnection() ? "MPU6050 connection successful" : "MPU6050 connection failed");
   // use the code below to change accel/gyro offset values
   /*
     Serial.println("Updating internal sensor offsets...");
