@@ -3,10 +3,51 @@
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 //	#include "boiler_wood_init.h"
 
-//	Блок httpServer	-----------------------------------------------------------
-byte mac[] = {0xCA, 0x74, 0xC0, 0xFF, 0xBD, 0x01};
-IPAddress ip(192, 168, 1, 111);
-EthernetServer httpServer(40111);
+//	Блок RS485	-----------------------------------------------------------
+int statePin;      //  статус Pin
+EasyTransfer ETin, ETout;  //create two objects
+#define DIR 13            // переключатель прием\передача на Pin13
+
+int ID = 11;              // номер этой ардуины 
+
+int bw_dsBoilerN;
+int bw_dsBoilerInN;
+int bw_dsBoilerOutN;
+
+struct RECEIVE_DATA_STRUCTURE {         // структура, которую будем принимать
+  //put your variable definitions here for the data you want to receive
+  //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
+  int ID;
+  int action;
+  int targetPin;
+  int levelPin;
+};
+int action = 0;    //  0/1 ("get"/"set") - запрос выдачи данных / команда на исполнение
+int levelPin = 0;       //  0/1 - установка уровня на Pin (LOW/HIGH)
+int targetPin = 9;          //  Pin управления
+
+struct SEND_DATA_STRUCTURE {                  // структура, которую будем передавать
+  int ID;
+  int bw_pressure;    // температура от датчика давления в трубе от бака
+  int bw_tPT100_smoke;       // температура от датчика DS18B20 на стенке бака внизу
+  int bw_flow;    // температура от датчика DS18B20 на стенке бака посередине
+  int bw_gy_shutter;      // температура от датчика DS18B20 на стенке бака вверху
+  int bw_servo_shutter;    // температура от датчика DS18B20 внутри бака
+  int bw_dsBoilerN;        // температура от датчика DS18B20 на выходном патрубке котла
+  int bw_dsBoiler;        // температура от датчика DS18B20 на выходном патрубке котла
+  int bw_dsBoilerInN;    // температура от датчика DS18B20 на трубе в бак
+  int bw_dsBoilerIn;    // температура от датчика DS18B20 на трубе в бак
+  int bw_dsBoilerOutN;   // температура от датчика DS18B20 на трубе из бака
+  int bw_dsBoilerOut;   // температура от датчика DS18B20 на трубе из бака
+  int statePin;      //  статус Pin
+};
+
+//give a name to the group of data
+RECEIVE_DATA_STRUCTURE rxdata;
+SEND_DATA_STRUCTURE txdata;
+//////////////////////////
+
+int maxValue;
 
 //	Блок DS18B20  -------------------------------------------------------------
 #define PIN9_ONE_WIRE_BUS 9 
@@ -20,7 +61,8 @@ uint8_t ds18DeviceCount;
 RBD::Timer ds18ConversionTimer;
 
 //  Блок flow YF-B5  ----------------------------------------------------------
-#define PIN_YFB5 2
+//#define PIN_YFB5 2
+#define PIN_YFB5 6
 #define PIN_INTERRUPT_YFB5 0
 #define YFB5_CALIBRATION_FACTOR 5
 //byte yfb5Interrupt = 0; // 0 = digital pin 2
