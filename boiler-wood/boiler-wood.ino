@@ -3,9 +3,9 @@
                                         Copyright © 2018-2020, Zigfred & Nik.S
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
   Сервер boiler-wood на Arduino Atmega328 Pro Mini:
-Скетч использует 14418 байт (46%) памяти устройства. Всего доступно 30720 байт.
-Глобальные переменные используют 764 байт (37%) динамической памяти, 
-оставляя 1284 байт для локальных переменных. Максимум: 2048 байт.
+Sketch uses 15,644 bytes (50.9%) of program storage space. Maximum is 30,720 bytes.
+Global variables use 955 bytes (46.6%) of dynamic memory, 
+leaving 1,093 bytes for local variables. Maximum is 2,048 bytes.
 /*****************************************************************************\
  Сервер boiler-wood выдает данные:
   аналоговые: 
@@ -24,7 +24,7 @@
 #define VERSION 11
 
 //  Блок libraries  -----------------------------------------------------------
-#include <EasyTransfer.h>       //  RS485 pins D2
+#include <SoftwareSerial.h>     //  RS485 pins D2, D3
 #include <OneWire.h>            //  DS18B20  pin OneWire D9
 #include <DallasTemperature.h>  //  DS18B20
 #include <RBD_Timer.h>          //  DS18B20
@@ -50,7 +50,9 @@ void setup() {
   Serial.print(F("FREE RAM: "));
   Serial.println(freeRam());
 
-  rs485Setup();
+  mySerial.begin(4800); // RS485
+
+  
   ds18b20Setup();
   yfb5InterruptSetup();
   pt100hx711Setup();
@@ -69,6 +71,8 @@ void loop() {
   ds18RequestTemperatures();
 
   parserDataString();
+
+  outTxData();
 
   resetWhen30Days();
 

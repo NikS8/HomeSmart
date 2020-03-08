@@ -4,15 +4,19 @@
 //	#include "boiler_wood_init.h"
 
 //	Блок RS485	-----------------------------------------------------------
+SoftwareSerial mySerial(2, 3); // RX, TX
+
+int bw_dsBoilerN;
+int bw_dsBoilerInN;
+int bw_dsBoilerOutN;
+/*
 int statePin;      //  статус Pin
 EasyTransfer ETin, ETout;  //create two objects
 #define DIR 13            // переключатель прием\передача на Pin13
 
 int ID = 11;              // номер этой ардуины 
 
-int bw_dsBoilerN;
-int bw_dsBoilerInN;
-int bw_dsBoilerOutN;
+
 
 struct RECEIVE_DATA_STRUCTURE {         // структура, которую будем принимать
   //put your variable definitions here for the data you want to receive
@@ -48,7 +52,7 @@ SEND_DATA_STRUCTURE txdata;
 //////////////////////////
 
 int maxValue;
-
+*/
 //	Блок DS18B20  -------------------------------------------------------------
 #define PIN9_ONE_WIRE_BUS 9 
 #define DS18_CONVERSION_TIME 750 // (1 << (12 - ds18Precision))
