@@ -27,7 +27,7 @@ String createDataString()
   resultData.concat(getGY521Data());
   
   resultData.concat(F(",\n\t\"bw-servo-shutter\":"));
-  resultData.concat(servomotor.read() - 93);
+  resultData.concat(servomotor.read());
 
   for (uint8_t index = 0; index < ds18DeviceCount; index++)
   {
