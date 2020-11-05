@@ -33,3 +33,5 @@
 
 /libraries/
 *.hex
+
+.idea
