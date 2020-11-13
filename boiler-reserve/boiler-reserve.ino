@@ -21,7 +21,7 @@
 #define VERSION 8
 
 //  Блок libraries  -----------------------------------------------------------
-#include <Ethernet2.h>          //  httpServer (40102) pins D10,D11,D12,D13
+#include <Ethernet2.h>          //  httpServer (40112) pins D10,D11,D12,D13
 #include <OneWire.h>            //  DS18B20  pin OneWire D9
 #include <DallasTemperature.h>  //  DS18B20
 #include <RBD_Timer.h>          //  DS18B20
