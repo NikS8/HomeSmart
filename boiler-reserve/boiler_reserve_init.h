@@ -31,6 +31,9 @@ unsigned long currentTime;
 //  Блок pressure  ------------------------------------------------------------
 #define PIN_PRESSURE_SENSOR A0
 
+//  Блок relay managed by http  ------------------------------------------------------------
+#define PIN_MANAGED 8
+
 //  Блок Energy Monitor  ------------------------------------------------------
 EnergyMonitor emon1;
 EnergyMonitor emon2;

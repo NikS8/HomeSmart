@@ -6,11 +6,24 @@ void realTimeService() {
   EthernetClient reqClient = httpServer.available();
   if (!reqClient) return;
 
-  while (reqClient.available()) reqClient.read();
+  String data = "";
+  String readString = String(100);
 
-  ds18RequestTemperatures();
+  while (reqClient.available()) {
+    char c = reqClient.read();
+    if (readString.length() < 100) {
+      readString.concat(c);
+    }
+  }
 
-  String data = createDataString();
+  if(readString.indexOf("start-heat") >= 0) {
+    digitalWrite(PIN_MANAGED, HIGH);
+  } else if(readString.indexOf("stop-heat") >= 0) {
+    digitalWrite(PIN_MANAGED, LOW);
+  } else {
+    ds18RequestTemperatures();
+    data = createDataString();
+  }
 
   reqClient.println(F("HTTP/1.1 200 OK"));
   reqClient.println(F("Content-Type: application/json"));
