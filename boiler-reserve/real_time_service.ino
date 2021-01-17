@@ -8,6 +8,9 @@ void realTimeService() {
 
   while (reqClient.available()) reqClient.read();
 
+  // update live watcher
+  lastRequestTime = millis();
+
   ds18RequestTemperatures();
 
   String data = createDataString();
