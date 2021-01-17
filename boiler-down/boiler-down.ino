@@ -18,7 +18,7 @@
 //  Блок DEVICE  --------------------------------------------------------------
 //  Arduino Pro Mini
 #define DEVICE_ID "boiler-down"
-#define VERSION 7
+#define VERSION 8
 
 //  Блок libraries  -----------------------------------------------------------
 #include <Ethernet2.h>          //  httpServer (40102) pins D10,D11,D12,D13
@@ -60,7 +60,7 @@ void loop() {
   currentTime = millis();
   realTimeService();
   
-  resetWhen30Days();
+  resetChecker();
 
 }
 
@@ -68,7 +68,8 @@ void loop() {
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
 
-02.01.2020 v7 Переход на блочно-модульное программирование 
+16.01.2021 v8 Reset added (30days uptime, and 3minutes no requests)
+02.01.2020 v7 Переход на блочно-модульное программирование
 13.11.2019 v6.0 переход на статические IP
 10.02.2019 v5.0 добавлено измерение уровня воды (дальномер HC-SR04)
 10.02.2019 v4.2 удален intrevalLogService

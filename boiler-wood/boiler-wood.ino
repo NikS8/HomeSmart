@@ -21,7 +21,7 @@
 //  Блок DEVICE  --------------------------------------------------------------
 //  Arduino Atmega328 Pro Mini
 #define DEVICE_ID "boiler-wood"
-#define VERSION 9
+#define VERSION 10
 
 //  Блок libraries  -----------------------------------------------------------
 #include <Ethernet2.h>          //  httpServer (40111) pins D10,D11,D12,D13
@@ -66,13 +66,14 @@ void loop() {
   currentTime = millis();
   realTimeService();
 
-  resetWhen30Days();
+  resetChecker();
 
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
+16.01.2021 v10 Reset added (30days uptime, and 3minutes no requests)
 01.02.2020 v9 add Servo995
 02.01.2020 v8.0 Переход на блочно-модульное программирование 
 25.12.2019 v7.0 добавлено измерение угла заслонки на базе GY-521
