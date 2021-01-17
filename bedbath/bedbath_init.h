@@ -24,4 +24,7 @@ int sensorDhtHum;       // влажность от датчика DHT22
 #define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000 
 // reset after 30 days uptime
 
+// reset when 3min no requests from collector
+#define RESET_ON_SILENCE_TIMEOUT 20000  //  = 3 * 60 * 1000
+unsigned long lastRequestTime = 0;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

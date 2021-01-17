@@ -18,7 +18,7 @@
 //  Блок DEVICE  --------------------------------------------------------------
 //  Arduino Pro Mini
 #define DEVICE_ID "boiler-reserve"
-#define VERSION 8
+#define VERSION 9
 
 //  Блок libraries  -----------------------------------------------------------
 #include <Ethernet2.h>          //  httpServer (40112) pins D10,D11,D12,D13
@@ -59,7 +59,7 @@ void loop() {
   currentTime = millis();
   realTimeService();
   
-  resetWhen30Days();
+  resetChecker();
 
 }
 
@@ -67,6 +67,7 @@ void loop() {
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
 
+16.01.2021 v9 Reset added (30days uptime, and 3minutes no requests)
 10.01.2020 v8 Переход на блочно-модульное программирование 
 22.11.2019 v7.0 добавлен датчик OPEN-SMART и подсчет импульсов YF-B5 за 15 сек
 13.11.2019 v6.0 переход на статические IP и префикс заменен на "br-"

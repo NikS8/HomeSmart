@@ -17,7 +17,7 @@
 //  Блок DEVICE  --------------------------------------------------------------
 //  Arduino ATmega328 Nano
 #define DEVICE_ID "collector-floor"
-#define VERSION 6
+#define VERSION 7
 
 //  Блок libraries  -----------------------------------------------------------
 #include <Ethernet2.h>            //  httpServer (40113) pins D10,D11,D12,D13
@@ -56,7 +56,7 @@ void loop() {
   
   realTimeService();
   
-  resetWhen30Days();
+  resetChecker();
 
 }
 
@@ -64,6 +64,7 @@ void loop() {
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
 
+16.01.2021 v7 Reset added (30days uptime, and 3minutes no requests)
 31.01.2020 v6 add servo996r
 07.01.2020 v5.0 Переход на блочно-модульное программирование
 13.12.2019 v4.1 учет импульсов YF-B5 за каждые 15 сек
