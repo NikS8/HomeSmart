@@ -46,6 +46,10 @@ String createDataString() {
   resultData.concat(F("\n\"cf-pressure\":"));
   resultData.concat(String(getPressureData(), 2));
 
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"br-force-enabled\":"));
+  resultData.concat(digitalRead(PIN_MANAGED));
+
   resultData.concat(F("\n}"));
   resultData.concat(F(","));
   resultData.concat(F("\n\"freeRam\":"));
