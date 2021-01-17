@@ -6,6 +6,9 @@ void realTimeService() {
   EthernetClient reqClient = httpServer.available();
   if (!reqClient) return;
 
+  // update live watcher
+  lastRequestTime = millis();
+
   while (reqClient.available()) reqClient.read();
 
   String data = createDataString();

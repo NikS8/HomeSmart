@@ -6,10 +6,11 @@ void realTimeService() {
   EthernetClient reqClient = httpServer.available();
   if (!reqClient) return;
 
-  while (reqClient.available()) reqClient.read();
-
   // update live watcher
   lastRequestTime = millis();
+
+  while (reqClient.available()) reqClient.read();
+
 
   ds18RequestTemperatures();
 
