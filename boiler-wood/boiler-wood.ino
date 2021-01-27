@@ -24,6 +24,7 @@
 #define VERSION 11
 
 //  Блок libraries  -----------------------------------------------------------
+#include <avr/wdt.h>
 #include <Ethernet2.h>          //  httpServer (40111) pins D10,D11,D12,D13
 #include <OneWire.h>            //  DS18B20  pin OneWire D9
 #include <DallasTemperature.h>  //  DS18B20
@@ -42,7 +43,8 @@
             setup
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void setup() {
-   
+  wdt_disable();
+
   Serial.begin(9600);
   Serial.println("Serial.begin(9600)");
 
@@ -56,12 +58,14 @@ void setup() {
   gy521Setup();
   servoSetup();
 
+  wdt_enable(WDTO_8S);
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             loop
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void loop() {
+  wdt_reset();
   realTimeService();
   resetChecker();
 }
