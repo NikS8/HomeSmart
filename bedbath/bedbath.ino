@@ -16,7 +16,7 @@
 //  Блок DEVICE  --------------------------------------------------------------
 //  Arduino Pro Mini
 #define DEVICE_ID "bedbath"
-#define VERSION 5
+#define VERSION 6
 
 //  Блок libraries  -----------------------------------------------------------
 #include <Ethernet2.h>          //  httpServer (40161) pins D10,D11,D12,D13
@@ -44,9 +44,8 @@ void setup() {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             loop
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-void loop() 
-{
-    realTimeService();
+void loop() {
+  realTimeService();
 	resetChecker();
 }
 
@@ -54,6 +53,7 @@ void loop()
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
 
+28.01.2021 v6 Reset: disabled 3min reset; 30days still works
 16.01.2021 v5 Reset added (30days uptime, and 3minutes no requests)
 13.01.2020 v4 Переход на блочно-модульное программирование 
 13.11.2019 v3.0 переход на статические IP
