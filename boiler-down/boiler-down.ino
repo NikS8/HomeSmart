@@ -18,7 +18,7 @@
 //  Блок DEVICE  --------------------------------------------------------------
 //  Arduino Pro Mini
 #define DEVICE_ID "boiler-down"
-#define VERSION 8
+#define VERSION 9
 
 //  Блок libraries  -----------------------------------------------------------
 #include <Ethernet2.h>          //  httpServer (40102) pins D10,D11,D12,D13
@@ -56,18 +56,15 @@ void setup() {
             loop
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void loop() {
-  
-  currentTime = millis();
   realTimeService();
-  
   resetChecker();
-
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
 
+28.01.2021 v9 Reset: disabled 3min reset; 30days still works
 16.01.2021 v8 Reset added (30days uptime, and 3minutes no requests)
 02.01.2020 v7 Переход на блочно-модульное программирование
 13.11.2019 v6.0 переход на статические IP

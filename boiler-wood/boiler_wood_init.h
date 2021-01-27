@@ -24,7 +24,6 @@ RBD::Timer ds18ConversionTimer;
 #define PIN_INTERRUPT_YFB5 0
 volatile long yfb5PulseCount = 0;
 // time
-unsigned long currentTime;
 unsigned long yfb5LastTime;
 
 //  Блок pressure  ------------------------------------------------------------
@@ -80,7 +79,4 @@ Servo servomotor;
 #define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000 
 // reset after 30 days uptime
 
-// reset when 3min no requests from collector
-#define RESET_ON_SILENCE_TIMEOUT 20000  //  = 3 * 60 * 1000
-unsigned long lastRequestTime = 0;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

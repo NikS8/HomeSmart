@@ -26,7 +26,6 @@ RBD::Timer ds18ConversionTimer;
 //byte yfb5Interrupt = 0; // 0 = digital pin 2
 volatile long yfb5PulseCount = 0;
 unsigned long yfb5LastTime;
-unsigned long currentTime;
 
 //  Блок pressure  ------------------------------------------------------------
 #define PIN_PRESSURE_SENSOR A0
@@ -43,7 +42,4 @@ EnergyMonitor emon3;
 #define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000 
 // reset after 30 days uptime
 
-// reset when 3min no requests from collector
-#define RESET_ON_SILENCE_TIMEOUT 20000  //  = 3 * 60 * 1000 
-unsigned long lastRequestTime = 0;
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

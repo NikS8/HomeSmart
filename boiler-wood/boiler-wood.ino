@@ -21,7 +21,7 @@
 //  Блок DEVICE  --------------------------------------------------------------
 //  Arduino Atmega328 Pro Mini
 #define DEVICE_ID "boiler-wood"
-#define VERSION 10
+#define VERSION 11
 
 //  Блок libraries  -----------------------------------------------------------
 #include <Ethernet2.h>          //  httpServer (40111) pins D10,D11,D12,D13
@@ -62,17 +62,15 @@ void setup() {
             loop
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void loop() {
-  
-  currentTime = millis();
   realTimeService();
-
   resetChecker();
-
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
+
+28.01.2021 v11 Reset: disabled 3min reset; 30days still works
 16.01.2021 v10 Reset added (30days uptime, and 3minutes no requests)
 01.02.2020 v9 add Servo995
 02.01.2020 v8.0 Переход на блочно-модульное программирование 

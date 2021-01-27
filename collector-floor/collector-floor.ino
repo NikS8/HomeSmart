@@ -17,7 +17,7 @@
 //  Блок DEVICE  --------------------------------------------------------------
 //  Arduino ATmega328 Nano
 #define DEVICE_ID "collector-floor"
-#define VERSION 7
+#define VERSION 8
 
 //  Блок libraries  -----------------------------------------------------------
 #include <Ethernet2.h>            //  httpServer (40113) pins D10,D11,D12,D13
@@ -51,19 +51,16 @@ void setup() {
             loop
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void loop() {
-
   ds18RequestTemperatures();
-  
   realTimeService();
-  
   resetChecker();
-
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
 
+28.01.2021 v8 Reset: disabled 3min reset; 30days still works
 16.01.2021 v7 Reset added (30days uptime, and 3minutes no requests)
 31.01.2020 v6 add servo996r
 07.01.2020 v5.0 Переход на блочно-модульное программирование
