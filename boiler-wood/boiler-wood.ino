@@ -34,6 +34,7 @@
 #include <MPU6050.h>            //  GY-521
 #include <Servo.h>              //  Servo995 pin 5
                                 //  flow YF-B5 pin D2
+                                //  speaker pin D3
 
 //  Блок settings  ------------------------------------------------------------
 #include "boiler_wood_init.h"
@@ -44,6 +45,7 @@
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void setup() {
   wdt_disable();
+  tone(PIN_TONE, TONE_START, TONE_START_DURATION);
 
   Serial.begin(9600);
   Serial.println("Serial.begin(9600)");

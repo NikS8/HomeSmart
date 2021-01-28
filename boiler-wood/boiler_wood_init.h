@@ -79,4 +79,15 @@ so 8 MISO
 
 MAX6675 thermocouple(PIN6_MAX6675_CLK, PIN6_MAX6675_CS, PIN6_MAX6675_DO);
 
+
+//  Блок Speakers  -------------------------------------------------------------
+
+#define PIN_TONE 3
+#define TONE_START 4000
+#define TONE_START_DURATION 2000
+#define TONE_HTTP_DATA 50
+#define TONE_HTTP_DATA_DURATION 10
+#define TONE_HTTP_COMMAND 300
+#define TONE_HTTP_COMMAND_DURATION 30
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
