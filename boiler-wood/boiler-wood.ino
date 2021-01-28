@@ -10,12 +10,12 @@
  Сервер boiler-wood выдает данные: 
   аналоговые: 
     датчик давления (A0)
-    датчик температуры PT100 (A1, A2 HX711)
   цифровые: 
     датчик скорости потока воды YF-B5(D2) (количество импульсов за 15 сек)
     датчики температуры DS18B20 (D9)
     датчик угла GY-521 (I2C A4, A5)
     датчик угла от Servo995 (D5)
+    датчик температуры (k-type) с платой MAX6675  (D6, D7, D8)
 /*****************************************************************************/
 
 //  Блок DEVICE  --------------------------------------------------------------
@@ -29,7 +29,7 @@
 #include <OneWire.h>            //  DS18B20  pin OneWire D9
 #include <DallasTemperature.h>  //  DS18B20
 #include <RBD_Timer.h>          //  DS18B20
-#include <HX711.h>              //  PT100 (HX711 A1,A2)//github.com/bogde/HX711
+#include <max6675.h>            //  MAX6675 thermocouple SPI: D6, D7, D8
 #include <I2Cdev.h>             //  GY-521 (I2C A4,A5)
 #include <MPU6050.h>            //  GY-521
 #include <Servo.h>              //  Servo995 pin 5
@@ -54,7 +54,6 @@ void setup() {
   httpServerSetup();
   ds18b20Setup();
   yfb5InterruptSetup();
-  pt100hx711Setup();
   gy521Setup();
   servoSetup();
 
