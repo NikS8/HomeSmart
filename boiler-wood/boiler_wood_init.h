@@ -87,6 +87,8 @@ MAX6675 thermocouple(PIN6_MAX6675_CLK, PIN6_MAX6675_CS, PIN6_MAX6675_DO);
 #define TONE_PAUSE 250
 #define TONE_QUEUE_LENGTH 6
 unsigned long toneNextFreeTime = 0;
+byte toneQueueLastItem = 0;
+byte toneQueueFirstItem = 0;
 unsigned long lastSpeakTime = 0;
 
 struct ToneBW {
@@ -104,7 +106,6 @@ ToneBW toneBWHigh = { 4500, 100, 50, 3 };
 ToneBW toneBWWarning = { 4500, 50, 50, 5 };
 ToneBW toneBWCritical = { 4500, 30, 20, 10 };
 
-
 struct ToneQueueItem {
   ToneBW toneBW;
   byte repeat;
@@ -112,31 +113,28 @@ struct ToneQueueItem {
 
 ToneQueueItem toneQueue[TONE_QUEUE_LENGTH];
 
-
 void addSound(ToneBW toneBW) {
-  for (byte i = 0; i < TONE_QUEUE_LENGTH; i = i + 1) {
-    if (toneQueue[i].repeat == 0) {
-      ToneQueueItem item = { toneBW, toneBW.repeat };
-      toneQueue[i] = item;
-      return;
-    }
+  int newLastToneItem = (toneQueueLastItem + 1) % TONE_QUEUE_LENGTH;
+
+  if (newLastToneItem != toneQueueFirstItem) {
+    ToneQueueItem item = { toneBW, toneBW.repeat };
+    toneQueue[toneQueueLastItem] = item;
+    toneQueueLastItem = newLastToneItem;
   }
 }
 void playSound() {
-  if (toneNextFreeTime > millis()) {
+  if (toneQueueFirstItem == toneQueueLastItem | toneNextFreeTime > millis()) {
     return;
   }
 
-  for (byte i = 0; i < TONE_QUEUE_LENGTH; i = i + 1) {
-    if (toneQueue[i].repeat > 0) {
-      // if last repeat - add default pause, if not last - add pause from instance
-      toneNextFreeTime = millis();
-      toneNextFreeTime += toneQueue[i].toneBW.duration;
-      toneNextFreeTime += toneQueue[i].repeat == 1 ? TONE_PAUSE : toneQueue[i].toneBW.pause;
-      toneQueue[i].repeat -= 1;
-      tone(PIN_SPEAKER, toneQueue[i].toneBW.fq, toneQueue[i].toneBW.duration);
-      return;
-    }
+  toneNextFreeTime = millis();
+  toneNextFreeTime += toneQueue[toneQueueFirstItem].toneBW.duration;
+  toneNextFreeTime += toneQueue[toneQueueFirstItem].repeat == 1 ? TONE_PAUSE : toneQueue[toneQueueFirstItem].toneBW.pause;
+  toneQueue[toneQueueFirstItem].repeat -= 1;
+  tone(PIN_SPEAKER, toneQueue[toneQueueFirstItem].toneBW.fq, toneQueue[toneQueueFirstItem].toneBW.duration);
+
+  if (toneQueue[toneQueueFirstItem].repeat == 0) {
+    toneQueueFirstItem  = (toneQueueFirstItem + 1) % TONE_QUEUE_LENGTH;
   }
 }
 
