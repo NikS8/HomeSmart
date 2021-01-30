@@ -2,6 +2,9 @@
             settings boiler_wood
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 //	#include "boiler_wood_init.h"
+bool isBurning = false;
+unsigned long nextStatusCheckTime = 0;
+#define STATUS_TIMEOUT 5000
 
 //	Блок httpServer	-----------------------------------------------------------
 byte mac[] = {0xCA, 0x74, 0xC0, 0xFF, 0xBD, 0x01};
@@ -83,13 +86,11 @@ MAX6675 thermocouple(PIN6_MAX6675_CLK, PIN6_MAX6675_CS, PIN6_MAX6675_DO);
 //  Блок Speakers  -------------------------------------------------------------
 
 #define PIN_SPEAKER 3
-#define TONE_STATUS_TIMEOUT 5000
 #define TONE_PAUSE 250
 #define TONE_QUEUE_LENGTH 6
 unsigned long toneNextFreeTime = 0;
 byte toneQueueLastItem = 0;
 byte toneQueueFirstItem = 0;
-unsigned long lastSpeakTime = 0;
 
 struct ToneBW {
   int fq;
@@ -123,7 +124,7 @@ void addSound(ToneBW toneBW) {
   }
 }
 void playSound() {
-  if (toneQueueFirstItem == toneQueueLastItem | toneNextFreeTime > millis()) {
+  if (!isBurning | toneQueueFirstItem == toneQueueLastItem | toneNextFreeTime > millis()) {
     return;
   }
 

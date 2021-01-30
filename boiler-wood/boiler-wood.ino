@@ -72,11 +72,14 @@ void loop() {
   resetChecker();
 
 
-  if (millis() > lastSpeakTime) {
-    lastSpeakTime += TONE_STATUS_TIMEOUT;
+  if (millis() > nextStatusCheckTime) {
+    nextStatusCheckTime += STATUS_TIMEOUT;
     uint8_t address[8] = { 0x28, 0xFF, 0xBB, 0x7E, 0x62, 0x18, 0x01, 0xE4 };
 
     int temp = ds18Sensors.getTempC(address);
+    int max6675Now = thermocouple.readCelsius();
+
+    isBurning = temp > 60 | max6675Now > 60;
 
     if (temp > 94) {
       addSound(toneBWCritical);
@@ -88,7 +91,6 @@ void loop() {
       addSound(toneBWNormal);
     }
 
-    int max6675Now = thermocouple.readCelsius();
     if (max6675Now > 350) {
       addSound(toneBWCritical);
     } else if (max6675Now > 300) {
