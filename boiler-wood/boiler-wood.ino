@@ -80,6 +80,9 @@ void loop() {
     int max6675Now = thermocouple.readCelsius();
 
     isBurning = temp > 60 | max6675Now > 60;
+    if (!isBurning) {
+      return;
+    }
 
     if (temp > 94) {
       addSound(toneBWCritical);

@@ -124,7 +124,7 @@ void addSound(ToneBW toneBW) {
   }
 }
 void playSound() {
-  if (!isBurning | toneQueueFirstItem == toneQueueLastItem | toneNextFreeTime > millis()) {
+  if (toneQueueFirstItem == toneQueueLastItem | toneNextFreeTime > millis()) {
     return;
   }
 
