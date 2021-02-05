@@ -17,10 +17,10 @@ void realTimeService() {
   }
 
   if(readString.indexOf("command") >= 0) {
-    tone(PIN_TONE, TONE_HTTP_COMMAND, TONE_HTTP_COMMAND_DURATION);
+    addSound(toneCommandRequest);
     data = commandFn(readString);
   } else {
-    tone(PIN_TONE, TONE_HTTP_DATA, TONE_HTTP_DATA_DURATION);
+    addSound(toneCollectorRequest);
     ds18RequestTemperatures();
     data = createDataString();
   }

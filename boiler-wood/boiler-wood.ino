@@ -45,7 +45,7 @@
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void setup() {
   wdt_disable();
-  tone(PIN_TONE, TONE_START, TONE_START_DURATION);
+  addSound(toneStartup);
 
   Serial.begin(9600);
   Serial.println("Serial.begin(9600)");
@@ -67,8 +67,45 @@ void setup() {
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void loop() {
   wdt_reset();
+  playSound();
   realTimeService();
   resetChecker();
+
+
+  if (millis() > nextStatusCheckTime) {
+    nextStatusCheckTime += STATUS_TIMEOUT;
+    uint8_t address[8] = { 0x28, 0xFF, 0xBB, 0x7E, 0x62, 0x18, 0x01, 0xE4 };
+
+    int temp = ds18Sensors.getTempC(address);
+    int max6675Now = thermocouple.readCelsius();
+
+    isBurning = temp > 60 | max6675Now > 60;
+    if (!isBurning) {
+      return;
+    }
+
+    if (temp > 94) {
+      addSound(toneBWCritical);
+    } else if (temp > 93) {
+      addSound(toneBWWarning);
+    } else if (temp > 88) {
+      addSound(toneBWHigh);
+    } else {
+      addSound(toneBWNormal);
+    }
+
+    if (max6675Now > 350) {
+      addSound(toneBWCritical);
+    } else if (max6675Now > 300) {
+      addSound(toneBWWarning);
+    } else if (max6675Now > 250) {
+      addSound(toneBWHigh);
+    } else {
+      addSound(toneBWNormal);
+    }
+  }
+
+
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
