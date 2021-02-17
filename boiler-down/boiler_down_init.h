@@ -23,26 +23,36 @@ RBD::Timer ds18ConversionTimer;
 #define PIN_YFB5 2
 #define PIN_INTERRUPT_YFB5 0
 #define YFB5_CALIBRATION_FACTOR 5
-//byte yfb5Interrupt = 0; // 0 = digital pin 2
 volatile long yfb5PulseCount = 0;
 unsigned long yfb5LastTime;
 
-//  Блок pressure  ------------------------------------------------------------
-#define PIN_PRESSURE_SENSOR A0
+//  Блок relay managed by http  ------------------------------------------------------------
+// relay pin 8 is free
+#define PIN_HEATER_RUN 7
+#define PIN_HEATER_1 A4
+#define PIN_HEATER_2 A5
+#define PIN_HEATER_3 3
+#define PIN_HEATER_4 4
+#define PIN_HEATER_5 5
+#define PIN_HEATER_6 6
+
+byte heaterStatePins[] = {
+  PIN_HEATER_RUN,
+  PIN_HEATER_1,
+  PIN_HEATER_2,
+  PIN_HEATER_3,
+  PIN_HEATER_4,
+  PIN_HEATER_5,
+  PIN_HEATER_6
+};
 
 //  Блок Energy Monitor  ------------------------------------------------------
 EnergyMonitor emon1;
 EnergyMonitor emon2;
 EnergyMonitor emon3;
 
-//  Блок HC-SR04  -------------------------------------------------------------
-#define TRIG_PIN 1
-#define ECHO_PIN 3
-HCSR04 hcsr04(TRIG_PIN, ECHO_PIN, 30, 4000); // пределы: от и до
-int taLevelWater;
-
 //	Блок TIME  ----------------------------------------------------------------
-#define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000 
-// reset after 30 days uptime
+#define RESET_UPTIME_TIME 3600000  //  //= 30 * 24 * 60 * 60 * 1000
+// reset every 1 hour uptime
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

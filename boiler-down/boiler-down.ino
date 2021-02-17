@@ -26,7 +26,6 @@
 #include <DallasTemperature.h>  //  DS18B20
 #include <RBD_Timer.h>          //  DS18B20
 #include <EmonLib.h>            //  трансформаторы тока pins A1,A2,A3
-#include <hcsr04.h>             //  HC-SR04  pins D1,D3
 //                                  flow YF-B5 pin D2
 
 //  Блок settings  ------------------------------------------------------------
@@ -38,7 +37,7 @@
             setup
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void setup() {
-  
+
   Serial.begin(9600);
   Serial.println("Serial.begin(9600)"); 
   
@@ -49,15 +48,70 @@ void setup() {
   ds18b20Setup();
   yfb5InterruptSetup();
   currentSetup();
+  relayModuleSetup();
   
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             loop
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+byte incomingByte;
+//bool reseted = false;
 void loop() {
   realTimeService();
   resetChecker();
+  serialLoop();
+
+}
+
+void serialLoop() {
+  
+  if (Serial.available() > 0) {
+
+    
+    // read the incoming byte:
+    incomingByte = Serial.read();
+
+    if (millis() < 20000) {
+      return;
+    }
+    // enable all heaters by send "1" to serial
+    // disable by any other char
+    //Serial.println(incomingByte);
+    if (incomingByte == 49) {
+      for (int i = 0; i < (sizeof(heaterStatePins) / sizeof(heaterStatePins[0])); i++) {
+        digitalWrite(heaterStatePins[i], LOW);
+      }
+      Serial.println("ON");
+      return;
+    }
+    if (incomingByte == 48) {
+      for (int i = 0; i < (sizeof(heaterStatePins) / sizeof(heaterStatePins[0])); i++) {
+        digitalWrite(heaterStatePins[i], HIGH);
+      }
+      Serial.println("OFF");
+      return;
+    }
+
+    if (incomingByte == 50) {
+      Serial.println("DS18 data:");
+      for (uint8_t index = 0; index < ds18DeviceCount; index++) {
+        DeviceAddress deviceAddress;
+        ds18Sensors.getAddress(deviceAddress, index);
+    
+        for (uint8_t i = 0; i < 8; i++) {
+          if (deviceAddress[i] < 16)  {
+            // ??
+          }
+          Serial.print(String(deviceAddress[i], HEX));
+        }
+        Serial.print(ds18Sensors.getTempC(deviceAddress));
+      }
+      return;
+    }
+
+    Serial.println("HELP: 0 - OFF all. 1 - ON all. 2 - print ds18 data");
+  }
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\

@@ -32,8 +32,7 @@ String createDataString() {
   resultData.concat(F(","));
   resultData.concat(F("\n\"bd-trans-3\":"));
   resultData.concat(String(emon3.calcIrms(1480), 1));
-  for (uint8_t index = 0; index < ds18DeviceCount; index++)
-  {
+  for (uint8_t index = 0; index < ds18DeviceCount; index++) {
     DeviceAddress deviceAddress;
     ds18Sensors.getAddress(deviceAddress, index);
 
@@ -52,11 +51,26 @@ String createDataString() {
   resultData.concat(String(getFlowData()));
 
   resultData.concat(F(","));
-  resultData.concat(F("\n\"ta-level\":"));
-  resultData.concat((400 - taLevelWater) / 10.0);
+  resultData.concat(F("\n\"bd-heater-run\":"));
+  resultData.concat(digitalRead(PIN_HEATER_RUN));
   resultData.concat(F(","));
-  resultData.concat(F("\n\"ta-level-filled%\":"));
-  resultData.concat((int)((400 - taLevelWater) / 4));
+  resultData.concat(F("\n\"bd-heater-1\":"));
+  resultData.concat(digitalRead(PIN_HEATER_1));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-2\":"));
+  resultData.concat(digitalRead(PIN_HEATER_2));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-3\":"));
+  resultData.concat(digitalRead(PIN_HEATER_3));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-4\":"));
+  resultData.concat(digitalRead(PIN_HEATER_4));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-5\":"));
+  resultData.concat(digitalRead(PIN_HEATER_5));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-6\":"));
+  resultData.concat(digitalRead(PIN_HEATER_6));
 
   resultData.concat(F("\n}"));
   resultData.concat(F(","));
