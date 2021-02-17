@@ -105,7 +105,8 @@ void serialLoop() {
           }
           Serial.print(String(deviceAddress[i], HEX));
         }
-        Serial.print(ds18Sensors.getTempC(deviceAddress));
+        Serial.print(": ");
+        Serial.println(ds18Sensors.getTempC(deviceAddress));
       }
       return;
     }
