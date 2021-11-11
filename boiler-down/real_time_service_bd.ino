@@ -10,9 +10,8 @@ void realTimeService() {
 
   ds18RequestTemperatures();
 
-  txOn();
   taLevelWater = hcsr04.distanceInMillimeters();
-  txOff();
+
 
   String data = createDataString();
 

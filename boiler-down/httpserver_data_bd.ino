@@ -32,10 +32,22 @@ String createDataString() {
   resultData.concat(F(","));
   resultData.concat(F("\n\"bd-trans-3\":"));
   resultData.concat(String(emon3.calcIrms(1480), 1));
-  for (uint8_t index = 0; index < ds18DeviceCount; index++)
+  resultData.concat(F("\n\"bd-trans-4\":"));
+  resultData.concat(String(emon4.calcIrms(1480), 1));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-trans-5\":"));
+  resultData.concat(String(emon5.calcIrms(1480), 1));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-trans-6\":"));
+  resultData.concat(String(emon6.calcIrms(1480), 1));
+   resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-trans-7\":"));
+  resultData.concat(String(emon7.calcIrms(1480), 1));
+ 
+  for (uint8_t index = 0; index < ds18DeviceCountElKot; index++)
   {
     DeviceAddress deviceAddress;
-    ds18Sensors.getAddress(deviceAddress, index);
+        ds18SensorsElKot.getAddress(deviceAddress, index);
 
     resultData.concat(F(",\n\""));
     for (uint8_t i = 0; i < 8; i++)
@@ -45,11 +57,14 @@ String createDataString() {
       resultData.concat(String(deviceAddress[i], HEX));
     }
     resultData.concat(F("\":"));
-    resultData.concat(ds18Sensors.getTempC(deviceAddress));
+    resultData.concat(ds18SensorsElKot.getTempC(deviceAddress));
   }
   resultData.concat(F(","));
-  resultData.concat(F("\n\"bd-flow\":"));
-  resultData.concat(String(getFlowData()));
+  resultData.concat(F("\n\"bd-flow-Boiler\":"));
+  resultData.concat(String(getFlowDataBoiler()));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-flow-TA\":"));
+  resultData.concat(String(getFlowDataTA()));
 
   resultData.concat(F(","));
   resultData.concat(F("\n\"ta-level\":"));

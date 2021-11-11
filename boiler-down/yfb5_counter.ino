@@ -1,10 +1,16 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             function to counting pulse
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-void yfb5PulseCounter() {
+void yfb5PulseCounterTA() {
   
   // Increment the pulse counter
-  yfb5PulseCount++;
+  yfb5PulseCountTA++;
+}
+
+void yfb5PulseCounterBoiler() {
+  
+  // Increment the pulse counter
+  yfb5PulseCountBoiler++;
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

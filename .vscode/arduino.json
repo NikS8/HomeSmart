@@ -1,0 +1,14 @@
+{
+    "port": "/dev/cu.usbserial-0001",
+    "includePath": [
+        "/Applications/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/**",
+        "/Applications/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/avr",
+        "${workspaceRoot}/../fast-arduino-lib/cores",
+        "${workspaceRoot}"
+    ],
+    "arduino.path": "/Applications",
+    "arduino.enableUSBDetection": true,
+    "board": "arduino:avr:mega",
+    "sketch": "boiler-down/boiler-down.ino",
+    "programmer": "arduino:arduinoisporg"
+}
