@@ -2,14 +2,6 @@
             function getCurrentCalibration
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 float getCurrentCalibration(){
-
-  emon1.current(1, 9.3);
-  emon2.current(2, 1);
-  emon3.current(3, 1);
-  emon4.current(4, 1);
-  emon5.current(5, 1);
-  emon6.current(6, 1);
-  emon7.current(7, 1);
   
 float current_etalon = emon1.calcIrms(1480);
 float current_2 = emon2.calcIrms(1480);
