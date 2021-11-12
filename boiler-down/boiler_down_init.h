@@ -50,6 +50,14 @@ unsigned long yfb5LastTimeBoiler;
 #define PIN_EMON6 A6
 #define PIN_EMON7 A7
 
+float current_koef1 = 9.3;
+float current_koef2 = 1;
+float current_koef3 = 1;
+float current_koef4 = 1;
+float current_koef5 = 1;
+float current_koef6 = 1;
+float current_koef7 = 1;    // Калибровка при float current_koef7 = 1;
+
 EnergyMonitor emon1;
 EnergyMonitor emon2;
 EnergyMonitor emon3;

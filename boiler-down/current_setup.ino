@@ -17,7 +17,7 @@ void currentSetup() {
   emon4.current(4, 9.29);
   emon5.current(5, 9.29);
   emon6.current(6, 9.29);
-  emon7.current(7, 9.29);
+  emon7.current(7, current_koef7);
   
 }
 

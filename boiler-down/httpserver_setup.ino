@@ -10,7 +10,16 @@ void httpServerSetup() {
   Serial.println(Ethernet.localIP());
 
   httpServer.begin();
-
+/*
+    //  Запрос статуса соединения
+  //  Вывод текста в монитор последовательного порта
+  Serial.print("Link status: ");
+  Serial.println(EthernetServerstatus());
+  
+  Serial.print("Если Unknown Статус: неизвестно. ");
+  Serial.println("Если LinkON подключение есть. Если LinkOFF подключения нет");
+*/
+ 
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

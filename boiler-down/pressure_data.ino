@@ -10,7 +10,7 @@ float getPressureData() {
   float press_avg = avg_sum / 8;
  // перевод значений в атм [(sensorPressTankFrom - 0,1*1023) / (1,6*1023/9,8)]
   float pressure = (( press_avg - 102.3) / 167);
-//  Serial.print(F("   sensorPress = "));
+  Serial.print(F("   sensorPress = "));
 //  Serial.println(pressure);
 
   return pressure;
