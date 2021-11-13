@@ -34,12 +34,16 @@
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void setup() {
   Serial.begin(9600);
+  delay(1000);
   Serial.println("Serial.begin(9600)"); 
-
-  httpServerSetup();
+  delay(1000);
   currentSetup();
-  
+  delay(1000);
   dht1.begin();
+  delay(1000);
+  httpServerSetup();
+  delay(1000);
+
 }
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             loop
