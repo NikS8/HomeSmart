@@ -34494,3 +34494,24 @@ Started logging.
 2021/11/12 12:31:06 IDE --> exit notif20 [93m read-unlocked[0m
 2021/11/12 12:31:06 Lost connection with clangd!
 2021/11/12 12:31:06 removing buildpath
+
+
+
+
+
+
+
+Started logging.
+2021/11/14 09:16:20 logging to /Volumes/Data/Programms/MySketchs/GitHub_VSCode/HomeSmart/boiler-down/inols.log
+2021/11/14 09:16:20 Initial board configuration: {"Arduino Mega or Mega 2560" arduino:avr:mega}
+2021/11/14 09:16:20 Language server build path: /private/var/folders/11/_l4gh9v178q0j0kx2_zv4pb00000gn/T/arduino-language-server973270262
+2021/11/14 09:16:20 Language server build sketch root: /private/var/folders/11/_l4gh9v178q0j0kx2_zv4pb00000gn/T/arduino-language-server973270262/sketch
+2021/11/14 09:16:20 [92mIDE --> LS     CL: REQUEST initialize 0: [0m
+2021/11/14 09:16:20 IDE --> initialize 0 [93m locked[0m
+2021/11/14 09:16:20 IDE --> initialize 0 [93m unlocked[0m
+2021/11/14 09:16:20 INIT--- initializing workbench
+2021/11/14 09:16:20 [91mIDE <-- LS     CL: ANSWER UNBOUND (0): [0m
+2021/11/14 09:16:20 INIT--- [93m locked[0m
+2021/11/14 09:16:20     --> initialize(file:///Volumes/Data/Programms/MySketchs/GitHub_VSCode/HomeSmart/boiler-down)
+2021/11/14 09:16:20 [92mIDE --> LS     CL: NOTIFICATION initialized: [0m
+2021/11/14 09:16:20 running:  /Applications/Arduino IDE.app/Contents/Resources/app/node_modules/arduino-ide-extension/build/arduino-cli --config-file /Users/niks/.arduinoIDE/arduino-cli.yaml compile --fqbn arduino:avr:mega --only-compilation-database --clean --source-override /var/folders/11/_l4gh9v178q0j0kx2_zv4pb00000gn/T/471513565 --build-path /private/var/folders/11/_l4gh9v178q0j0kx2_zv4pb00000gn/T/arduino-language-server973270262 --format json /Volumes/Data/Programms/MySketchs/GitHub_VSCode/HomeSmart/boiler-down

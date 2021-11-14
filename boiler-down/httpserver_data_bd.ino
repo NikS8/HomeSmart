@@ -23,7 +23,7 @@ String createDataString() {
 */
   resultData.concat(F(","));
   resultData.concat(F("\n\"data\": {"));
-
+//  трансформаторы тока
   resultData.concat(F("\n\"bd-trans-1\":"));
   resultData.concat(String(emon1.calcIrms(1480), 1));
   resultData.concat(F(","));
@@ -32,6 +32,7 @@ String createDataString() {
   resultData.concat(F(","));
   resultData.concat(F("\n\"bd-trans-3\":"));
   resultData.concat(String(emon3.calcIrms(1480), 1));
+  resultData.concat(F(","));
   resultData.concat(F("\n\"bd-trans-4\":"));
   resultData.concat(String(emon4.calcIrms(1480), 1));
   resultData.concat(F(","));
@@ -43,7 +44,7 @@ String createDataString() {
    resultData.concat(F(","));
   resultData.concat(F("\n\"bd-trans-7\":"));
   resultData.concat(String(emon7.calcIrms(1480), 1));
- 
+//  ds18b20 
   for (uint8_t index = 0; index < ds18DeviceCountElKot; index++)
   {
     DeviceAddress deviceAddress;
@@ -59,6 +60,39 @@ String createDataString() {
     resultData.concat(F("\":"));
     resultData.concat(ds18SensorsElKot.getTempC(deviceAddress));
   }
+
+  for (uint8_t index = 0; index < ds18DeviceCountBoiler; index++)
+  {
+    DeviceAddress deviceAddress;
+        ds18SensorsBoiler.getAddress(deviceAddress, index);
+
+    resultData.concat(F(",\n\""));
+    for (uint8_t i = 0; i < 8; i++)
+    {
+      if (deviceAddress[i] < 16)  resultData.concat("0");
+
+      resultData.concat(String(deviceAddress[i], HEX));
+    }
+    resultData.concat(F("\":"));
+    resultData.concat(ds18SensorsBoiler.getTempC(deviceAddress));
+  }
+
+  for (uint8_t index = 0; index < ds18DeviceCountTA; index++)
+  {
+    DeviceAddress deviceAddress;
+        ds18SensorsTA.getAddress(deviceAddress, index);
+
+    resultData.concat(F(",\n\""));
+    for (uint8_t i = 0; i < 8; i++)
+    {
+      if (deviceAddress[i] < 16)  resultData.concat("0");
+
+      resultData.concat(String(deviceAddress[i], HEX));
+    }
+    resultData.concat(F("\":"));
+    resultData.concat(ds18SensorsTA.getTempC(deviceAddress));
+  }
+//  yf-b5
   resultData.concat(F(","));
   resultData.concat(F("\n\"bd-flow-Boiler\":"));
   resultData.concat(String(getFlowDataBoiler()));
