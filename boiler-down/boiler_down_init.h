@@ -55,7 +55,7 @@ unsigned long yfb5LastTimeBoiler;
 #define PIN_EMON4 A4
 #define PIN_EMON5 A5
 #define PIN_EMON6 A6
-#define PIN_EMON7 A7
+#define PIN_EMON7 A0
 
 float current_koef1 = 9.3;
 float current_koef2 = 1;

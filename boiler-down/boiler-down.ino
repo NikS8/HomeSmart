@@ -47,7 +47,7 @@ void setup() {
   
   Serial.begin(9600);
   Serial.println("Serial.begin(9600)"); 
-    delay (2000);
+    delay (1000);
 
   Serial.print(F("FREE RAM: "));
   Serial.println(freeRam());
