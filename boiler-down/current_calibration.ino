@@ -18,7 +18,7 @@ current_koef5 = current_etalon / current_5;
 current_koef6 = current_etalon / current_6;
 current_koef7 = current_etalon / current_7;
 
-Serial.println("   Калиброка виполнена"); 
+Serial.println("   Результаты калиброки: "); 
 
 Serial.print("float current_koef2 = "); Serial.print(current_koef2);  
 Serial.println(";"); 
@@ -33,12 +33,13 @@ Serial.println(";");
 Serial.print("float current_koef7 = "); Serial.print(current_koef7);  
 Serial.println(";"); 
 
-Serial.println(" Результаты калиброки надо скопировать "); 
-Serial.println(" в файл boiler_down_init.h в Блок Energy Monitor"); 
-
-Serial.println("   П а у з а      на   16 минут"); 
-
-delay(999999);
+Serial.println(""); 
+Serial.println(" Результаты калиброки надо скопировать и заменить"); 
+Serial.println(" в файле boiler_down_init.h в Блоке Energy Monitor"); 
+Serial.println(""); 
+Serial.println("   П а у з а      на   2 минуты"); 
+delay(111111);
+Serial.println("     Пауза закончилась"); 
 
 }
 

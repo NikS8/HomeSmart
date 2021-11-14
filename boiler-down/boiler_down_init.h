@@ -9,21 +9,28 @@ IPAddress ip(192,168,1,102);
 EthernetServer httpServer(40102);
 
 //	Блок DS18B20  -------------------------------------------------------------
-#define PIN_WIRE_BUS_ELKOT 41 
-#define PIN_TA_WIRE_BUS 42
-#define PIN_BOILER_WIRE_BUS 43 
+#define PIN_WIRE_BUS_BD 40
+#define PIN_WIRE_BUS_BT 41
+#define PIN_WIRE_BUS_TA 42
+#define PIN_WIRE_BUS_HP 43
 #define DS18_CONVERSION_TIME 750 // (1 << (12 - ds18Precision))
 #define DS18_PRECISION = 11
 
-OneWire ds18wireElKot(PIN_WIRE_BUS_ELKOT);
-DallasTemperature ds18SensorsElKot(&ds18wireElKot);
-uint8_t ds18DeviceCountElKot;
-OneWire ds18wireTA(PIN_TA_WIRE_BUS);
+OneWire ds18wireBD(PIN_WIRE_BUS_BD);
+DallasTemperature ds18SensorsBD(&ds18wireBD);
+uint8_t ds18DeviceCountBD;
+
+OneWire ds18wireBT(PIN_WIRE_BUS_BT);
+DallasTemperature ds18SensorsBT(&ds18wireBT);
+uint8_t ds18DeviceCountBT;
+
+OneWire ds18wireTA(PIN_WIRE_BUS_TA);
 DallasTemperature ds18SensorsTA(&ds18wireTA);
 uint8_t ds18DeviceCountTA;
-OneWire ds18wireBoiler(PIN_BOILER_WIRE_BUS);
-DallasTemperature ds18SensorsBoiler(&ds18wireBoiler);
-uint8_t ds18DeviceCountBoiler;
+
+OneWire ds18wireHP(PIN_WIRE_BUS_HP);
+DallasTemperature ds18SensorsHP(&ds18wireHP);
+uint8_t ds18DeviceCountHP;
 
 RBD::Timer ds18ConversionTimer;
 

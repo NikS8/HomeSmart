@@ -71,10 +71,9 @@ void loop() {
   
   if (current_koef7 == 1 ) 
   {
-    Serial.println("  Калиброка через 5 сек"); 
-    delay(5000);
+    Serial.println("  Калиброка через 22 сек  (метки времени убрать)"); 
+    delay(2222);
     Serial.println("  Старт автокалибровки"); 
-
     getCurrentCalibration();
 
   }

@@ -4,7 +4,7 @@
 void httpServerSetup() {
 
   Ethernet.begin(mac, ip);
-
+  delay(3333);
   Serial.println(F("Server is ready."));
   Serial.print(F("Please connect to http://"));
   Serial.println(Ethernet.localIP());

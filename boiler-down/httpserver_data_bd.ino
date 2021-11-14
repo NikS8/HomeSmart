@@ -45,10 +45,10 @@ String createDataString() {
   resultData.concat(F("\n\"bd-trans-7\":"));
   resultData.concat(String(emon7.calcIrms(1480), 1));
 //  ds18b20 
-  for (uint8_t index = 0; index < ds18DeviceCountElKot; index++)
+  for (uint8_t index = 0; index < ds18DeviceCountBD; index++)
   {
     DeviceAddress deviceAddress;
-        ds18SensorsElKot.getAddress(deviceAddress, index);
+        ds18SensorsBD.getAddress(deviceAddress, index);
 
     resultData.concat(F(",\n\""));
     for (uint8_t i = 0; i < 8; i++)
@@ -58,13 +58,13 @@ String createDataString() {
       resultData.concat(String(deviceAddress[i], HEX));
     }
     resultData.concat(F("\":"));
-    resultData.concat(ds18SensorsElKot.getTempC(deviceAddress));
+    resultData.concat(ds18SensorsBD.getTempC(deviceAddress));
   }
 
-  for (uint8_t index = 0; index < ds18DeviceCountBoiler; index++)
+ for (uint8_t index = 0; index < ds18DeviceCountBT; index++)
   {
     DeviceAddress deviceAddress;
-        ds18SensorsBoiler.getAddress(deviceAddress, index);
+        ds18SensorsBT.getAddress(deviceAddress, index);
 
     resultData.concat(F(",\n\""));
     for (uint8_t i = 0; i < 8; i++)
@@ -74,7 +74,7 @@ String createDataString() {
       resultData.concat(String(deviceAddress[i], HEX));
     }
     resultData.concat(F("\":"));
-    resultData.concat(ds18SensorsBoiler.getTempC(deviceAddress));
+    resultData.concat(ds18SensorsBT.getTempC(deviceAddress));
   }
 
   for (uint8_t index = 0; index < ds18DeviceCountTA; index++)
@@ -91,6 +91,22 @@ String createDataString() {
     }
     resultData.concat(F("\":"));
     resultData.concat(ds18SensorsTA.getTempC(deviceAddress));
+  }
+
+  for (uint8_t index = 0; index < ds18DeviceCountHP; index++)
+  {
+    DeviceAddress deviceAddress;
+        ds18SensorsHP.getAddress(deviceAddress, index);
+
+    resultData.concat(F(",\n\""));
+    for (uint8_t i = 0; i < 8; i++)
+    {
+      if (deviceAddress[i] < 16)  resultData.concat("0");
+
+      resultData.concat(String(deviceAddress[i], HEX));
+    }
+    resultData.concat(F("\":"));
+    resultData.concat(ds18SensorsHP.getTempC(deviceAddress));
   }
 //  yf-b5
   resultData.concat(F(","));
