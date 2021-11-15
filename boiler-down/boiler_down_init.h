@@ -58,7 +58,7 @@ unsigned long yfb5LastTimeBoiler;
 #define PIN_EMON6 A6
 #define PIN_EMON7 A0
 
-float current_koef1 = 9.3;
+float current_koef1 = 1;
 float current_koef2 = 1;
 float current_koef3 = 1;
 float current_koef4 = 1;
@@ -73,6 +73,15 @@ EnergyMonitor emon4;
 EnergyMonitor emon5;
 EnergyMonitor emon6;
 EnergyMonitor emon7;
+
+//  Блок PZEM004T  ------------------------------------------------------------
+#if !defined(PZEM_RX_PIN) && !defined(PZEM_TX_PIN)
+#define PZEM_RX_PIN 38
+#define PZEM_TX_PIN 39
+#endif
+
+SoftwareSerial pzemSWSerial(PZEM_RX_PIN, PZEM_TX_PIN);  // RX, TX
+PZEM004Tv30 pzem(pzemSWSerial);
 
 //  Блок HC-SR04  -------------------------------------------------------------
 #define PIN_TRIG 22
