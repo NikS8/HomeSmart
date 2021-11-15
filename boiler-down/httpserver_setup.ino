@@ -3,12 +3,14 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void httpServerSetup() {
 
+  Ethernet.init(PIN_CS);
+  delay(88);
   Ethernet.begin(mac, ip);
-  delay(33);
+  delay(88);
   Serial.println(F("Server is ready."));
   Serial.print(F("Please connect to http://"));
   Serial.println(Ethernet.localIP());
-
+  delay(88);
   httpServer.begin();
 /*
     //  Запрос статуса соединения

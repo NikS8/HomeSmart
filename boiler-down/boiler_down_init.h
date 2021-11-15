@@ -4,7 +4,8 @@
 //	#include "boiler_down_init.h"
 
 //	Блок httpServer	-----------------------------------------------------------
-byte mac[] = {0xCA,0x74,0xBA,0xCE,0xBE,0x01};
+#define PIN_CS 53
+byte mac[] = {0xCA, 0x74, 0xBA, 0xCE, 0xBE, 0x01};
 IPAddress ip(192,168,1,102);
 EthernetServer httpServer(40102);
 
