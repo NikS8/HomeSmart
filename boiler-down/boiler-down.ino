@@ -30,7 +30,7 @@ speak pin D32
 #include <DallasTemperature.h>  //  DS18B20
 #include <RBD_Timer.h>          //  DS18B20
 #include <EmonLib.h>          //  трансформаторы тока pins A1,A2,A3,A4,A5,A6,A7
-#include <PZEM004T.h>         //  pins Serial D37,D39
+#include <PZEM004Tv30.h>         //  pins Serial D37,D39
 #include <SoftwareSerial.h>   //  для PZEM 
 #include <hcsr04.h>           //  HC-SR04  pins D22,D23
 #include <Servo.h>            //  Servo996R pins D4,D5
