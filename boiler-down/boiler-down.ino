@@ -31,7 +31,6 @@ speak pin D32
 #include <RBD_Timer.h>          //  DS18B20
 #include <EmonLib.h>          //  трансформаторы тока pins A1,A2,A3,A4,A5,A6,A7
 #include <PZEM004Tv30.h>         //  pins Serial D37,D39
-#include <SoftwareSerial.h>   //  для PZEM 
 #include <hcsr04.h>           //  HC-SR04  pins D22,D23
 #include <Servo.h>            //  Servo996R pins D4,D5
 #include <EnableInterrupt.h>      //  flow YF-B5 pins D2,D3
@@ -50,6 +49,8 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Serial.begin(9600)"); 
     delay (1000);
+ // Serial3.begin(9600);
+ // Serial3.println("Serial.begin(9600)"); 
 
   Serial.print(F("FREE RAM: "));
   Serial.println(freeRam());

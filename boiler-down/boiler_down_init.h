@@ -76,12 +76,15 @@ EnergyMonitor emon7;
 
 //  Блок PZEM004T  ------------------------------------------------------------
 #if !defined(PZEM_RX_PIN) && !defined(PZEM_TX_PIN)
-#define PZEM_RX_PIN 38
-#define PZEM_TX_PIN 39
+#define PZEM_RX_PIN 14
+#define PZEM_TX_PIN 15
 #endif
 
-SoftwareSerial pzemSWSerial(PZEM_RX_PIN, PZEM_TX_PIN);  // RX, TX
-PZEM004Tv30 pzem(pzemSWSerial);
+#if !defined(PZEM_SERIAL)
+#define PZEM_SERIAL Serial3
+#endif
+PZEM004Tv30 pzem(PZEM_SERIAL);
+
 
 //  Блок HC-SR04  -------------------------------------------------------------
 #define PIN_TRIG 22
