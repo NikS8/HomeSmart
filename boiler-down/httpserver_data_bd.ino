@@ -137,6 +137,9 @@ String createDataString() {
   resultData.concat(F(","));
   resultData.concat(F("\n\"bd-heater-6\":"));
   resultData.concat(digitalRead(PIN_HEATER_6));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-7\":"));
+  resultData.concat(digitalRead(PIN_HEATER_7));
 
   resultData.concat(F(","));
   resultData.concat(F("\n\"ta-level\":"));

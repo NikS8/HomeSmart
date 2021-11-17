@@ -1,5 +1,5 @@
 {
-    "port": "/dev/cu.usbmodem141401",
+    "port": "/dev/cu.usbmodem141301",
     "includePath": [
         "/Applications/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/**",
         "/Applications/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/avr",

@@ -51,13 +51,14 @@ unsigned long yfb5LastTimeBoiler;
 
 //  Блок relay managed by http  ------------------------------------------------------------
 // relay pin 8 is free
-#define PIN_HEATER_RUN 7
-#define PIN_HEATER_1 A4
-#define PIN_HEATER_2 A5
-#define PIN_HEATER_3 3
-#define PIN_HEATER_4 4
-#define PIN_HEATER_5 5
-#define PIN_HEATER_6 6
+#define PIN_HEATER_RUN 31
+#define PIN_HEATER_1 24
+#define PIN_HEATER_2 25
+#define PIN_HEATER_3 26
+#define PIN_HEATER_4 27
+#define PIN_HEATER_5 28
+#define PIN_HEATER_6 29
+#define PIN_HEATER_7 30
 
 byte heaterStatePins[] = {
   PIN_HEATER_RUN,
@@ -66,7 +67,8 @@ byte heaterStatePins[] = {
   PIN_HEATER_3,
   PIN_HEATER_4,
   PIN_HEATER_5,
-  PIN_HEATER_6
+  PIN_HEATER_6,
+  PIN_HEATER_7
 };
 
 //  Блок Energy Monitor  ------------------------------------------------------
