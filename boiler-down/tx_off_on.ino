@@ -1,12 +1,7 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
-            Setup relay  Module
+            Включение-выключение TX
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-void relayModuleSetup() {
-  for (byte i = 0; i < (sizeof(heaterStatePins) / sizeof(heaterStatePins[0])); i++) {
-    pinMode(heaterStatePins[i], OUTPUT);
-    digitalWrite(heaterStatePins[i], HIGH);
-  }
-
-}
+  void txOff() { UCSR0B |= (1 << TXEN0); }
+  void txOn() { UCSR0B &= ~(1 << TXEN0); }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
