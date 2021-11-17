@@ -1,29 +1,34 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             function to measurement flow water
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-int getFlowData() {
-  //  static int yfb5PulsesPerSecond;
-  unsigned long yfb5PulsesPerSecond;
+int getFlowDataBoiler() {
 
-  unsigned long deltaTime = millis() - yfb5LastTime;
-  //  if ((millis() - yfb5LastTime) < 1000) {
-  if (deltaTime < 15000)
-  {
+  unsigned long flowSensorPulsesPerSecondBoiler;
+  unsigned long deltaTime = millis() - sensorPulseLastTimeBoiler;
+
+  if (deltaTime < 15000)  {
     return;
   }
+  flowSensorPulsesPerSecondBoiler = sensorPulseCountBoiler * 15000 / deltaTime;
+  sensorPulseLastTimeBoiler = millis();
+  sensorPulseCountBoiler = 0;
 
-  //detachInterrupt(yfb5Interrupt);
-  detachInterrupt(PIN_INTERRUPT_YFB5);
-  yfb5PulsesPerSecond = yfb5PulseCount;
-  yfb5PulsesPerSecond *= 15000;
-  yfb5PulsesPerSecond /= deltaTime; //  количество за секунду
-
-  yfb5LastTime = millis();
-  yfb5PulseCount = 0;
-  //attachInterrupt(yfb5Interrupt, yfb5PulseCounter, FALLING);
-  attachInterrupt(PIN_INTERRUPT_YFB5, yfb5PulseCounter, FALLING);
-
-  return yfb5PulsesPerSecond;
+  return flowSensorPulsesPerSecondBoiler;
 }
+
+  int getFlowDataTA()
+  {
+  unsigned long flowSensorPulsesPerSecondTA;
+  unsigned long deltaTime = millis() - sensorPulseLastTimeTA;
+
+  if (deltaTime < 15000)  { 
+    return; 
+    }
+  flowSensorPulsesPerSecondTA = sensorPulseCountTA * 15000 / deltaTime;
+  sensorPulseLastTimeTA = millis();
+  sensorPulseCountTA = 0;
+
+  return flowSensorPulsesPerSecondTA;
+  }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
