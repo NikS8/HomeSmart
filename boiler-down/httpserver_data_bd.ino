@@ -117,6 +117,28 @@ String createDataString() {
   resultData.concat(String(getFlowDataTA()));
 
   resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-run\":"));
+  resultData.concat(digitalRead(PIN_HEATER_RUN));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-1\":"));
+  resultData.concat(digitalRead(PIN_HEATER_1));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-2\":"));
+  resultData.concat(digitalRead(PIN_HEATER_2));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-3\":"));
+  resultData.concat(digitalRead(PIN_HEATER_3));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-4\":"));
+  resultData.concat(digitalRead(PIN_HEATER_4));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-5\":"));
+  resultData.concat(digitalRead(PIN_HEATER_5));
+  resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-6\":"));
+  resultData.concat(digitalRead(PIN_HEATER_6));
+
+  resultData.concat(F(","));
   resultData.concat(F("\n\"ta-level\":"));
   resultData.concat((400 - taLevelWater) / 10.0);
   resultData.concat(F(","));

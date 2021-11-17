@@ -2,7 +2,7 @@
             function getCurrentCalibration
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 float getCurrentCalibration(){
-  
+ /* 
 float current_etalon = emon1.calcIrms(1480);
 float current_2 = emon2.calcIrms(1480);
 float current_3 = emon3.calcIrms(1480);
@@ -40,7 +40,7 @@ Serial.println("");
 Serial.println("   П а у з а      на   2 минуты"); 
 delay(111111);
 Serial.println("     Пауза закончилась"); 
-
+*/
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
