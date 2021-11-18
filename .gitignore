@@ -35,3 +35,4 @@
 *.hex
 *.log
 .idea
+.vscode
