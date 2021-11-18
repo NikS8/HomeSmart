@@ -33,5 +33,6 @@
 
 /libraries/
 *.hex
-
+*.log
 .idea
+.vscode
