@@ -24,41 +24,41 @@ void realTimeService() {
 
     // command?run-h1-h2-h3-h4-h5-h6
     if (runHeater) {
-      digitalWrite(heaterStatePins[0], LOW);
-    } else {
       digitalWrite(heaterStatePins[0], HIGH);
+    } else {
+      digitalWrite(heaterStatePins[0], LOW);
     }
 
 
       if (readString.indexOf("h1") >= 0 && runHeater) {
-        digitalWrite(heaterStatePins[1], LOW);
-      } else {
         digitalWrite(heaterStatePins[1], HIGH);
+      } else {
+        digitalWrite(heaterStatePins[1], LOW);
       }
       if (readString.indexOf("h2") >= 0 && runHeater) {
-        digitalWrite(heaterStatePins[2], LOW);
-      } else {
         digitalWrite(heaterStatePins[2], HIGH);
+      } else {
+        digitalWrite(heaterStatePins[2], LOW);
       }
       if (readString.indexOf("h3") >= 0 && runHeater) {
-        digitalWrite(heaterStatePins[3], LOW);
-      } else {
         digitalWrite(heaterStatePins[3], HIGH);
+      } else {
+        digitalWrite(heaterStatePins[3], LOW);
       }
       if (readString.indexOf("h4") >= 0 && runHeater) {
-        digitalWrite(heaterStatePins[4], LOW);
-      } else {
         digitalWrite(heaterStatePins[4], HIGH);
+      } else {
+        digitalWrite(heaterStatePins[4], LOW);
       }
       if (readString.indexOf("h5") >= 0 && runHeater) {
-        digitalWrite(heaterStatePins[5], LOW);
-      } else {
         digitalWrite(heaterStatePins[5], HIGH);
+      } else {
+        digitalWrite(heaterStatePins[5], LOW);
       }
       if (readString.indexOf("h6") >= 0 && runHeater) {
-        digitalWrite(heaterStatePins[6], LOW);
-      } else {
         digitalWrite(heaterStatePins[6], HIGH);
+      } else {
+        digitalWrite(heaterStatePins[6], LOW);
       }
 
     //data = commandFn(readString);

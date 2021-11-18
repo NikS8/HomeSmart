@@ -1,5 +1,5 @@
 {
-    "port": "/dev/cu.usbmodem141301",
+    "port": "/dev/cu.usbmodem141401",
     "includePath": [
         "/Applications/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/**",
         "/Applications/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/avr",
@@ -9,6 +9,5 @@
     "arduino.path": "/Applications",
     "arduino.enableUSBDetection": true,
     "board": "arduino:avr:mega",
-    "sketch": "boiler-down/boiler-down.ino",
     "programmer": "arduino:arduinoisporg"
 }
