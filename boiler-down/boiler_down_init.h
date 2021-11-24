@@ -50,25 +50,24 @@ unsigned long yfb5LastTimeBoiler;
 #define PIN_SENSOR_PRESSURE A0
 
 //  Блок relay managed by http  ------------------------------------------------------------
-// relay pin 8 is free
-#define PIN_HEATER_RUN 31
-#define PIN_HEATER_1 24
-#define PIN_HEATER_2 25
-#define PIN_HEATER_3 26
+#define PIN_HEATER_RUN 24
+#define PIN_PUMP 26
+#define PIN_HEATER_1 28
+#define PIN_HEATER_2 30
+#define PIN_HEATER_3 25
 #define PIN_HEATER_4 27
-#define PIN_HEATER_5 28
-#define PIN_HEATER_6 29
-#define PIN_HEATER_7 30
+#define PIN_HEATER_5 29
+#define PIN_HEATER_6 31
 
 byte heaterStatePins[] = {
   PIN_HEATER_RUN,
+  PIN_PUMP,
   PIN_HEATER_1,
   PIN_HEATER_2,
   PIN_HEATER_3,
   PIN_HEATER_4,
   PIN_HEATER_5,
-  PIN_HEATER_6,
-  PIN_HEATER_7
+  PIN_HEATER_6
 };
 
 //  Блок Energy Monitor  ------------------------------------------------------
@@ -120,7 +119,7 @@ Servo servo996in;
 Servo servo996out;
 
 //	Блок TIME  ----------------------------------------------------------------
-#define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000 
+#define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000
 // reset after 30 days uptime
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

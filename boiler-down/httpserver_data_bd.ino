@@ -2,7 +2,7 @@
             createDataString
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 String createDataString() {
-  
+
   String resultData;
 
     resultData.concat(F("{"));
@@ -12,7 +12,7 @@ String createDataString() {
   resultData.concat(F("\",\n\"version\":"));
   resultData.concat(VERSION);
 /*
-  
+
   resultData.concat(F("{"));
   resultData.concat(F("\n\"deviceId\":"));
   //  resultData.concat(String(DEVICE_ID));
@@ -42,9 +42,9 @@ String createDataString() {
   resultData.concat(F("\n\"bd-trans-6\":"));
   resultData.concat(String(emon6.calcIrms(1480), 1));
    resultData.concat(F(","));
-  resultData.concat(F("\n\"bd-trans-7\":"));
+  resultData.concat(F("\n\"bd-trans-pump\":"));
   resultData.concat(String(emon7.calcIrms(1480), 1));
-//  ds18b20 
+//  ds18b20
   for (uint8_t index = 0; index < ds18DeviceCountBD; index++)
   {
     DeviceAddress deviceAddress;
@@ -120,6 +120,9 @@ String createDataString() {
   resultData.concat(F("\n\"bd-heater-run\":"));
   resultData.concat(digitalRead(PIN_HEATER_RUN));
   resultData.concat(F(","));
+  resultData.concat(F("\n\"bd-heater-pump\":"));
+  resultData.concat(digitalRead(PIN_PUMP));
+  resultData.concat(F(","));
   resultData.concat(F("\n\"bd-heater-1\":"));
   resultData.concat(digitalRead(PIN_HEATER_1));
   resultData.concat(F(","));
@@ -137,9 +140,6 @@ String createDataString() {
   resultData.concat(F(","));
   resultData.concat(F("\n\"bd-heater-6\":"));
   resultData.concat(digitalRead(PIN_HEATER_6));
-  resultData.concat(F(","));
-  resultData.concat(F("\n\"bd-heater-7\":"));
-  resultData.concat(digitalRead(PIN_HEATER_7));
 
   resultData.concat(F(","));
   resultData.concat(F("\n\"ta-level\":"));
