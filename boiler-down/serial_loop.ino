@@ -2,27 +2,28 @@
             Loop for serial
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void serialLoop() {
-  
+
   if (Serial.available() > 0) {
 
-    
+
     // read the incoming byte:
     int incomingByte = Serial.read();
 
+    // trick for esp-link - it sends a lot of info in serial on start so ignore first 20s
     if (millis() < 20000) {
       return;
     }
     // enable all heaters by send "1" to serial
     // disable by any other char
     //Serial.println(incomingByte);
-    if (incomingByte == 49) {
+    if (incomingByte == 48) { // type "1" to run all
       for (int i = 0; i < (sizeof(heaterStatePins) / sizeof(heaterStatePins[0])); i++) {
         digitalWrite(heaterStatePins[i], LOW);
       }
       Serial.println("ON");
       return;
     }
-    if (incomingByte == 48) {
+    if (incomingByte == 49) { // type "0" to disable all
       for (int i = 0; i < (sizeof(heaterStatePins) / sizeof(heaterStatePins[0])); i++) {
         digitalWrite(heaterStatePins[i], HIGH);
       }
@@ -30,12 +31,12 @@ void serialLoop() {
       return;
     }
 
-    if (incomingByte == 50) {
+    if (incomingByte == 50) { // type "2"
       Serial.println("DS18 data:");
       for (uint8_t index = 0; index < ds18DeviceCountBD; index++) {
         DeviceAddress deviceAddress;
         ds18SensorsBD.getAddress(deviceAddress, index);
-    
+
         for (uint8_t i = 0; i < 8; i++) {
           if (deviceAddress[i] < 16)  {
             // ??
@@ -48,6 +49,8 @@ void serialLoop() {
       return;
     }
 
+    Serial.print(F("FREE RAM: "));
+    Serial.println(freeRam());
     Serial.println("HELP: 0 - OFF all. 1 - ON all. 2 - print ds18 data");
   }
 }

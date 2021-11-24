@@ -1,22 +1,23 @@
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
                                                                boiler-down.ino
                                         Copyright © 2018-2021, Zigfred & Nik.S
-\*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\                            
+\*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
   Arduino MEGA 2560 PRO:
-Скетч использует 27334 байт (10%) памяти устройства. Всего доступно 253952 байт.
-Глобальные переменные используют 1622 байт (19%) динамической памяти, 
-оставляя 6570 байт для локальных переменных. Максимум: 8192 байт.
+Sketch uses 27408 bytes (10%) of program storage space. Maximum is 253952 bytes.
+Global variables use 1666 bytes (20%) of dynamic memory,
+leaving 6526 bytes for local variables. Maximum is 8192 bytes.
 /*****************************************************************************\
   Сервер boiler-down выдает данные:
-    аналоговые: 
-датчики трансформаторы тока (pins A1, A2, A3, A4, A5, A6, A7)
+    аналоговые:
+датчики трансформаторы тока (pins A0, A1, A2, A3, A4, A5, A6)
     цифровые:
 датчик скорости потока воды YF-B5 (D2, D3)(количество импульсов за 15 сек)
 датчики температуры DS18B20 (OneWire pin D41, D42, D43)
 дальномер HC-SR04 (D22, D23)(измерение уровня воды)
-датчик положения клапана от Servo996R (pins D4,D5)
+серво для поворота клапана от Servo996R (pins D4,D5)
+PZEM004 added to board but not supported yet
     звуковые:
-speak pin D32
+speak pin D46
 /*****************************************************************************/
 
 //  Блок DEVICE  --------------------------------------------------------------
@@ -25,15 +26,15 @@ speak pin D32
 #define VERSION 10
 
 //  Блок libraries  -----------------------------------------------------------
-#include <Ethernet2.h>          //  httpServer (40102) pins D10,81,83,84,85
-#include <OneWire.h>            //  DS18B20 pins OneWire D41, D42, D43
+#include <Ethernet2.h>          //  httpServer (40102) pins D50-D53
+#include <OneWire.h>            //  DS18B20 pins OneWire D40, D41, D42, D43
 #include <DallasTemperature.h>  //  DS18B20
 #include <RBD_Timer.h>          //  DS18B20
-#include <EmonLib.h>          //  трансформаторы тока pins A1,A2,A3,A4,A5,A6,A7
+#include <EmonLib.h>          //  трансформаторы тока pins A0,A1,A2,A3,A4,A5,A6
 #include <hcsr04.h>           //  HC-SR04  pins D22,D23
 #include <Servo.h>            //  Servo996R pins D4,D5
 #include <EnableInterrupt.h>      //  flow YF-B5 pins D2,D3
-//                                speak pin D32
+//                                speak pin D46
 
 //  Блок settings  ------------------------------------------------------------
 #include "boiler_down_init.h"
@@ -44,23 +45,23 @@ speak pin D32
             setup
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void setup() {
-  
+  tone(PIN_SPEAKER, 3000, 300);
+
   Serial.begin(9600);
-  Serial.println("Serial.begin(9600)"); 
-    delay (1000);
+  Serial.println("Serial.begin(9600)");
 
   Serial.print(F("FREE RAM: "));
   Serial.println(freeRam());
-  
+
   ds18b20Setup();
   yfb5InterruptSetup();
   currentSetup();
   servo996rSetup();
   relayModuleSetup();
 
-  delay (2000);
   httpServerSetup();
 
+    Serial.println("HELP: 0 - OFF all. 1 - ON all. 2 - print ds18 data");
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
@@ -70,23 +71,13 @@ void loop() {
   realTimeService();
   resetChecker();
   serialLoop();
- /* 
-  if (current_koef7 == 1 ) 
-  {
-    Serial.println("  Калиброка через 22 сек  (метки времени убрать)"); 
-    delay(2222);
-    Serial.println("  Старт автокалибровки"); 
-    getCurrentCalibration();
-
-  }
-  */
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             info
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
 
-03.11.2021 v10  переход на 6-ти теновый котел и на Arduino MEGA 2560 PRO  
+24.11.2021 v10 установлен контроллер Mega2560 Pro
 28.01.2021 v9.0 Reset: disabled 3min reset; 30days still works
 16.01.2021 v8.0 Reset added (30days uptime, and 3minutes no requests)
 02.01.2020 v7.0 Переход на блочно-модульное программирование
@@ -99,7 +90,7 @@ void loop() {
 04.02.2019 v2.3 переменные с префиксом boiler-down-
 03.02.2019 v2.2 преобразование в формат  F("")
 28.01.2019 v2.1 переименование boilerDown в boiler-down
-23.01.2019 v2.0 добавлены ds18 ТА и в №№ ds18 только 2 знака 
+23.01.2019 v2.0 добавлены ds18 ТА и в №№ ds18 только 2 знака
 11.01.2019 v1.3 переименование boiler6kw в boilerDown
 10.01.2019 v1.2 изменен расчет в YF-B5
 03.01.2019 v1.1 откалиброваны коэфициенты трансформаторов тока

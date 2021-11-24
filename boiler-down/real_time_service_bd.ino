@@ -15,9 +15,11 @@ void realTimeService() {
       readString.concat(c);
     }
   }
-    Serial.println(freeRam());
+  //Serial.println(freeRam());
 
-  if (readString.indexOf("ping") >= 0) {
+  if (readString.indexOf("favicon") >= 0) {
+  data = "";
+  } else if (readString.indexOf("ping") >= 0) {
     data = "PONG";
   } else if (readString.indexOf("command") >= 0) {
     bool runHeater = readString.indexOf("run") >= 0;
@@ -70,12 +72,13 @@ void realTimeService() {
     //data = commandFn(readString);
     //commandFn(readString);
   } else {
-    ds18RequestTemperatures();
+  // TODO check for "/"
     data = createDataString();
   }
-    Serial.println(freeRam());
+    //Serial.println(freeRam());
 
   reqClient.println(F("HTTP/1.1 200 OK"));
+  reqClient.println(F("Connection: close"));
   reqClient.println(F("Content-Type: application/json"));
   reqClient.print(F("Content-Length: "));
   reqClient.println(data.length());
@@ -83,9 +86,10 @@ void realTimeService() {
   reqClient.print(data);
 
   reqClient.stop();
-      Serial.println(freeRam());
+  //Serial.println(freeRam());
 
 }
+/*
 
 
 //String commandFn(String &readString) {
@@ -145,5 +149,6 @@ String parseGetParam(String reqString, String paramName) {
 
   return reqString;
 }
+ */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

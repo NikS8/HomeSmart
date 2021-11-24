@@ -43,7 +43,7 @@ String createDataString() {
   resultData.concat(String(emon6.calcIrms(1480), 1));
    resultData.concat(F(","));
   resultData.concat(F("\n\"bd-trans-pump\":"));
-  resultData.concat(String(emon7.calcIrms(1480), 1));
+  resultData.concat(String(emon_pump.calcIrms(1480), 1));
 //  ds18b20
   for (uint8_t index = 0; index < ds18DeviceCountBD; index++)
   {
@@ -110,11 +110,8 @@ String createDataString() {
   }
 //  yf-b5
   resultData.concat(F(","));
-  resultData.concat(F("\n\"bd-flow-Boiler\":"));
-  resultData.concat(String(getFlowDataBoiler()));
-  resultData.concat(F(","));
-  resultData.concat(F("\n\"bd-flow-TA\":"));
-  resultData.concat(String(getFlowDataTA()));
+  resultData.concat(F("\n\"bd-flow\":"));
+  resultData.concat(String(getFlowData()));
 
   resultData.concat(F(","));
   resultData.concat(F("\n\"bd-heater-run\":"));
