@@ -72,7 +72,7 @@ void realTimeService() {
     //data = commandFn(readString);
     //commandFn(readString);
   } else {
-  // TODO check for "/"
+    ds18RequestTemperatures();
     data = createDataString();
   }
     //Serial.println(freeRam());
