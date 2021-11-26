@@ -73,13 +73,13 @@ byte heaterStatePins[] = {
 #define PIN_EMON5 A5
 #define PIN_EMON6 A6
 
-float current_koef_pump = 19.6;
-float current_koef1 = 19.6;
-float current_koef2 = 19.6;
-float current_koef3 = 19.6;
-float current_koef4 = 19.6;
-float current_koef5 = 19.6;
-float current_koef6 = 19.6;
+float current_koef_pump = 9.3;
+float current_koef1 = 9.3;
+float current_koef2 = 9.3;
+float current_koef3 = 9.3;
+float current_koef4 = 9.3;
+float current_koef5 = 9.3;
+float current_koef6 = 9.3;
 
 EnergyMonitor emon_pump;
 EnergyMonitor emon1;
