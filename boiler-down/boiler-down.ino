@@ -30,11 +30,10 @@ speak pin D46
 #include <OneWire.h>            //  DS18B20 pins OneWire D40, D41, D42, D43
 #include <DallasTemperature.h>  //  DS18B20
 #include <RBD_Timer.h>          //  DS18B20
-#include <EmonLib.h>          //  трансформаторы тока pins A0,A1,A2,A3,A4,A5,A6
-#include <hcsr04.h>           //  HC-SR04  pins D22,D23
-#include <Servo.h>            //  Servo996R pins D4,D5
-#include <EnableInterrupt.h>      //  flow YF-B5 pins D2,D3
-//                                speak pin D46
+#include <EmonLib.h>            //  трансформаторы тока pins A0,A1,A2,A3,A4,A5,A6
+#include <hcsr04.h>             //  HC-SR04  pins D22,D23
+#include <Servo.h>              //  Servo996R pins D4,D5
+//                              //  speaker pin D46
 
 //  Блок settings  ------------------------------------------------------------
 #include "boiler_down_init.h"
