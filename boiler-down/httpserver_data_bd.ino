@@ -43,7 +43,7 @@ String createDataString() {
   resultData.concat(String(emon6.calcIrms(1480), 1));
    resultData.concat(F(","));
   resultData.concat(F("\n\"bd-trans-pump\":"));
-  resultData.concat(String(emon_pump.calcIrms(1480), 1));
+  resultData.concat(String(emon_pump.calcIrms(1480), 3));
 //  ds18b20
   for (uint8_t index = 0; index < ds18DeviceCountBD; index++)
   {
