@@ -17,9 +17,6 @@ String createDataString()
   resultData.concat(F("\n\t\"bw-pressure\":"));
   resultData.concat(String(getPressureData(), 2));
 
-  resultData.concat(F(",\n\t\"bw-tPT100-smoke\":"));
-  resultData.concat(String(getPT100Data()));
-
   for (uint8_t index = 0; index < ds18DeviceCount; index++)
   {
     DeviceAddress deviceAddress;
@@ -38,6 +35,9 @@ String createDataString()
   
   resultData.concat(F(",\n\t\"bw-flow\":"));
   resultData.concat(String(getFlowData()));
+
+  resultData.concat(F(",\n\t\"bw-smoke-1\":"));
+  resultData.concat(String(thermocouple.readCelsius()));
   
   resultData.concat(F(",\n\t\"bw-shutter-gy\":"));
   resultData.concat(getGY521Data());

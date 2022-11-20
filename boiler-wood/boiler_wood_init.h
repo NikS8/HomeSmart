@@ -2,6 +2,9 @@
             settings boiler_wood
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 //	#include "boiler_wood_init.h"
+bool isBurning = false;
+unsigned long nextStatusCheckTime = 0;
+#define STATUS_TIMEOUT 5000
 
 //	Блок httpServer	-----------------------------------------------------------
 byte mac[] = {0xCA, 0x74, 0xC0, 0xFF, 0xBD, 0x01};
@@ -28,25 +31,6 @@ unsigned long yfb5LastTime;
 
 //  Блок pressure  ------------------------------------------------------------
 #define PIN_PRESSURE_SENSOR A0
-
-//  Блок PPT100 HX711  --------------------------------------------------------
-//https://github.com/bogde/HX711
-
-#define UMIN  900000
-#define UMAX 8000000
-#define RMIN    80.0
-#define RMAX   400.0
-
-HX711 get_U;
-//  https://forum.arduino.cc/index.php?topic=432678.0
-
-const long  Uu = 1987905;//..1987230;// Rohmesswert unteres Ende
-const long  Uo = 4112725;//4153141;// Rohmesswert oberes Ende
-const float Ru = 106.7; // 17* // Widerstandswert unteres Ende
-const float Ro = 220.5;// 318* // Widerstandswert oberes Ende
-
-long Umess;
-float Rx, tempPT100;
 
 //  Блок GY-521 MPU6050  ------------------------------------------------------
 // I2Cdev and MPU6050 must be installed as libraries, or else the .cpp/.h files
@@ -78,5 +62,82 @@ Servo servomotor;
 //	Блок TIME  ----------------------------------------------------------------
 #define RESET_UPTIME_TIME 43200000  //  = 30 * 24 * 60 * 60 * 1000 
 // reset after 30 days uptime
+
+//  Блок max6675  -------------------------------------------------------------
+
+/*
+MISO: SOMI, SDO (на устройстве), DO, DON, SO, MRSR;
+MOSI: SIMO, SDI (на устройстве), DI, DIN, SI, MTST;
+SCLK: SCK, CLK, SPC (SPI serial port clock);
+SS: nCS, CS, CSB, CSN, NSS, nSS, STE, SYNC.
+
+sck 6 SCLK
+cs 7 SS
+so 8 MISO
+*/
+
+#define PIN6_MAX6675_CLK 6 // SCLK
+#define PIN6_MAX6675_CS 7  // SS
+#define PIN6_MAX6675_DO 8  // MISO
+
+MAX6675 thermocouple(PIN6_MAX6675_CLK, PIN6_MAX6675_CS, PIN6_MAX6675_DO);
+
+
+//  Блок Speakers  -------------------------------------------------------------
+
+#define PIN_SPEAKER 3
+#define TONE_PAUSE 250
+#define TONE_QUEUE_LENGTH 6
+unsigned long toneNextFreeTime = 0;
+byte toneQueueLastItem = 0;
+byte toneQueueFirstItem = 0;
+
+struct ToneBW {
+  int fq;
+  int duration;
+  byte pause;
+  byte repeat;
+};
+
+ToneBW toneStartup = { 3000, 300, 30, 4 };
+ToneBW toneCollectorRequest = { 100, 20, 0, 1 };
+ToneBW toneCommandRequest = { 300, 20, 0, 1 };
+ToneBW toneBWNormal = { 4000, 150, 40, 2 };
+ToneBW toneBWHigh = { 4500, 100, 50, 3 };
+ToneBW toneBWWarning = { 4500, 50, 50, 5 };
+ToneBW toneBWCritical = { 4500, 30, 20, 10 };
+
+struct ToneQueueItem {
+  ToneBW toneBW;
+  byte repeat;
+};
+
+ToneQueueItem toneQueue[TONE_QUEUE_LENGTH];
+
+void addSound(ToneBW toneBW) {
+  int newLastToneItem = (toneQueueLastItem + 1) % TONE_QUEUE_LENGTH;
+
+  if (newLastToneItem != toneQueueFirstItem) {
+    ToneQueueItem item = { toneBW, toneBW.repeat };
+    toneQueue[toneQueueLastItem] = item;
+    toneQueueLastItem = newLastToneItem;
+  }
+}
+void playSound() {
+  if (toneQueueFirstItem == toneQueueLastItem | toneNextFreeTime > millis()) {
+    return;
+  }
+
+  toneNextFreeTime = millis();
+  toneNextFreeTime += toneQueue[toneQueueFirstItem].toneBW.duration;
+  toneNextFreeTime += toneQueue[toneQueueFirstItem].repeat == 1 ? TONE_PAUSE : toneQueue[toneQueueFirstItem].toneBW.pause;
+  toneQueue[toneQueueFirstItem].repeat -= 1;
+  tone(PIN_SPEAKER, toneQueue[toneQueueFirstItem].toneBW.fq, toneQueue[toneQueueFirstItem].toneBW.duration);
+
+  if (toneQueue[toneQueueFirstItem].repeat == 0) {
+    toneQueueFirstItem  = (toneQueueFirstItem + 1) % TONE_QUEUE_LENGTH;
+  }
+}
+
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

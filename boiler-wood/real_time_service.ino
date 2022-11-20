@@ -6,11 +6,24 @@ void realTimeService() {
   EthernetClient reqClient = httpServer.available();
   if (!reqClient) return;
 
-  while (reqClient.available()) reqClient.read();
+  String data = "";
+  String readString = String(100);
 
-  ds18RequestTemperatures();
+  while (reqClient.available()) {
+    char c = reqClient.read();
+    if (readString.length() < 100) {
+      readString.concat(c);
+    }
+  }
 
-  String data = createDataString();
+  if(readString.indexOf("command") >= 0) {
+    addSound(toneCommandRequest);
+    data = commandFn(readString);
+  } else {
+    addSound(toneCollectorRequest);
+    ds18RequestTemperatures();
+    data = createDataString();
+  }
 
   reqClient.println(F("HTTP/1.1 200 OK"));
   reqClient.println(F("Content-Type: application/json"));

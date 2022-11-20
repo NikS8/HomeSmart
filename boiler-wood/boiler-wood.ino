@@ -4,18 +4,18 @@
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
   Arduino Atmega328 Pro Mini:
 Скетч использует 24788 байт (80%) памяти устройства. Всего доступно 30720 байт.
-Глобальные переменные используют 985 байт (48%) динамической памяти, 
+Глобальные переменные используют 985 байт (48%) динамической памяти,
 оставляя 1063 байт для локальных переменных. Максимум: 2048 байт.
 /*****************************************************************************\
  Сервер boiler-wood выдает данные: 
   аналоговые: 
     датчик давления (A0)
-    датчик температуры PT100 (A1, A2 HX711)
   цифровые: 
     датчик скорости потока воды YF-B5(D2) (количество импульсов за 15 сек)
     датчики температуры DS18B20 (D9)
     датчик угла GY-521 (I2C A4, A5)
     датчик угла от Servo995 (D5)
+    датчик температуры (k-type) с платой MAX6675  (D6, D7, D8)
 /*****************************************************************************/
 
 //  Блок DEVICE  --------------------------------------------------------------
@@ -24,15 +24,17 @@
 #define VERSION 11
 
 //  Блок libraries  -----------------------------------------------------------
+#include <avr/wdt.h>
 #include <Ethernet2.h>          //  httpServer (40111) pins D10,D11,D12,D13
 #include <OneWire.h>            //  DS18B20  pin OneWire D9
 #include <DallasTemperature.h>  //  DS18B20
 #include <RBD_Timer.h>          //  DS18B20
-#include <HX711.h>              //  PT100 (HX711 A1,A2)//github.com/bogde/HX711
-#include "I2Cdev.h"             //  GY-521 (I2C A4,A5)
-#include "MPU6050.h"            //  GY-521 
+#include <max6675.h>            //  MAX6675 thermocouple SPI: D6, D7, D8
+#include <I2Cdev.h>             //  GY-521 (I2C A4,A5)
+#include <MPU6050.h>            //  GY-521
 #include <Servo.h>              //  Servo995 pin 5
                                 //  flow YF-B5 pin D2
+                                //  speaker pin D3
 
 //  Блок settings  ------------------------------------------------------------
 #include "boiler_wood_init.h"
@@ -42,7 +44,9 @@
             setup
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void setup() {
-   
+  wdt_disable();
+  addSound(toneStartup);
+
   Serial.begin(9600);
   Serial.println("Serial.begin(9600)");
 
@@ -52,18 +56,56 @@ void setup() {
   httpServerSetup();
   ds18b20Setup();
   yfb5InterruptSetup();
-  pt100hx711Setup();
   gy521Setup();
   servoSetup();
 
+  wdt_enable(WDTO_8S);
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
             loop
 \*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 void loop() {
+  wdt_reset();
+  playSound();
   realTimeService();
   resetChecker();
+
+
+  if (millis() > nextStatusCheckTime) {
+    nextStatusCheckTime += STATUS_TIMEOUT;
+    uint8_t address[8] = { 0x28, 0xFF, 0xBB, 0x7E, 0x62, 0x18, 0x01, 0xE4 };
+
+    int temp = ds18Sensors.getTempC(address);
+    int max6675Now = thermocouple.readCelsius();
+
+    isBurning = temp > 60 | max6675Now > 60;
+    if (!isBurning) {
+      return;
+    }
+
+    if (temp > 94) {
+      addSound(toneBWCritical);
+    } else if (temp > 93) {
+      addSound(toneBWWarning);
+    } else if (temp > 88) {
+      addSound(toneBWHigh);
+    } else {
+      addSound(toneBWNormal);
+    }
+
+    if (max6675Now > 350) {
+      addSound(toneBWCritical);
+    } else if (max6675Now > 300) {
+      addSound(toneBWWarning);
+    } else if (max6675Now > 250) {
+      addSound(toneBWHigh);
+    } else {
+      addSound(toneBWNormal);
+    }
+  }
+
+
 }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*\
